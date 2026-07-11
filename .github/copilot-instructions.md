@@ -20,7 +20,7 @@
 
 ## Frontend Conventions
 - Standalone components (no NgModules)
-- Component inline styles in SCSS
+- Each component has 3 files: `{name}.component.ts`, `{name}.component.html`, `{name}.component.scss` — never inline templates or styles
 - State management: Angular signals
 - Routing: child routes under `AppShellComponent` (sidebar layout)
 - All pages are lazy-loaded
