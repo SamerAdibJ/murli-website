@@ -1,5 +1,17 @@
-import { Controller, Get } from '@nestjs/common';
+import {
+  Body,
+  Controller,
+  Delete,
+  Get,
+  Param,
+  ParseIntPipe,
+  Patch,
+  Post,
+} from '@nestjs/common';
 import { MurlisService } from './murlis.service';
+import { CreateMurliDto } from './dto/create-murli.dto';
+import { UpdateMurliDto } from './dto/update-murli.dto';
+import { ok } from '../common/helpers/response';
 
 @Controller('murli')
 export class MurlisController {
@@ -7,6 +19,34 @@ export class MurlisController {
 
   @Get('today')
   async getTodayMurli() {
-    return await this.murlisService.getTodayMurli();
+    const murli = await this.murlisService.getTodayMurli();
+    return ok(murli, 'Today Murli fetched successfully');
+  }
+
+  @Get(':date')
+  async getMurliByDate(@Param('date') date: string) {
+    const murli = await this.murlisService.getMurliByDate(date);
+    return ok(murli, `Murli for ${date} fetched successfully`);
+  }
+
+  @Post()
+  async createMurli(@Body() data: CreateMurliDto) {
+    const murli = await this.murlisService.createMurli(data);
+    return ok(murli, 'Murli created successfully');
+  }
+
+  @Patch(':id')
+  async updateMurli(
+    @Param('id', ParseIntPipe) id: number,
+    @Body() data: UpdateMurliDto,
+  ) {
+    const murli = await this.murlisService.updateMurli(id, data);
+    return ok(murli, 'Murli updated successfully');
+  }
+
+  @Delete(':id')
+  async deleteMurli(@Param('id', ParseIntPipe) id: number) {
+    await this.murlisService.deleteMurli(id);
+    return ok(null, 'Murli deleted successfully');
   }
 }

@@ -1,15 +1,19 @@
 {
-  "name": "murli-website",
-  "version": "1.0.0",
-  "private": true,
-  "workspaces": [
-    "frontend",
-    "backend",
-    "shared"
-  ],
-  "scripts": {
-    "frontend": "npm run start --workspace=frontend",
-    "backend": "npm run start:dev --workspace=backend",
-    "build:shared": "npm run build --workspace=shared"
-  }
+	"name": "murli-website",
+	"version": "1.0.0",
+	"private": true,
+	"workspaces": [
+		"frontend",
+		"backend",
+		"shared"
+	],
+	"scripts": {
+		"frontend": "npm run start --workspace=frontend",
+		"backend": "npm run start:dev --workspace=backend",
+		"build:shared": "npm run build --workspace=shared",
+		"dev": "concurrently -n backend,frontend -c cyan,magenta \"npm run start:dev -w backend\" \"npm run start -w frontend\""
+	},
+	"devDependencies": {
+		"concurrently": "^10.0.3"
+	}
 }

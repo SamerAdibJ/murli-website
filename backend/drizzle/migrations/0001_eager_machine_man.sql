@@ -1,0 +1,1 @@
+ALTER TABLE "murlis" DROP COLUMN "test_field";

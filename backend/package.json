@@ -18,8 +18,9 @@
     "test:cov": "jest --coverage",
     "test:debug": "node --inspect-brk -r tsconfig-paths/register -r ts-node/register node_modules/.bin/jest --runInBand",
     "test:e2e": "jest --config ./test/jest-e2e.json",
-    "db:generate": "dotenv -e .env -- drizzle-kit generate",
-    "db:push": "dotenv -e .env -- drizzle-kit push"
+    "db:generate": "drizzle-kit generate",
+    "db:migrate": "drizzle-kit migrate",
+    "db:push": "drizzle-kit push"
   },
   "dependencies": {
     "@nestjs/common": "^11.0.1",
@@ -27,10 +28,12 @@
     "@nestjs/core": "^11.0.1",
     "@nestjs/platform-express": "^11.0.1",
     "@nestjs/swagger": "^11.4.5",
+    "dotenv": "^17.4.2",
     "drizzle-orm": "^0.45.2",
     "pg": "^8.22.0",
     "reflect-metadata": "^0.2.2",
-    "rxjs": "^7.8.1"
+    "rxjs": "^7.8.1",
+    "shared": "*"
   },
   "devDependencies": {
     "@eslint/eslintrc": "^3.2.0",

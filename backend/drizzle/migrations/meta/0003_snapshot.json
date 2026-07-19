@@ -1,0 +1,199 @@
+{
+  "id": "7b5f78cd-72dd-4ce9-9ce0-54ca8b11fd6d",
+  "prevId": "74587a34-575a-4cd5-a3f1-5712cf0bcb55",
+  "version": "7",
+  "dialect": "postgresql",
+  "tables": {
+    "public.murlis": {
+      "name": "murlis",
+      "schema": "",
+      "columns": {
+        "id": {
+          "name": "id",
+          "type": "serial",
+          "primaryKey": true,
+          "notNull": true
+        },
+        "date": {
+          "name": "date",
+          "type": "date",
+          "primaryKey": false,
+          "notNull": true
+        },
+        "title_en": {
+          "name": "title_en",
+          "type": "varchar(500)",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "title_ar": {
+          "name": "title_ar",
+          "type": "varchar(500)",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "essence_ar": {
+          "name": "essence_ar",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "essence_en": {
+          "name": "essence_en",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "question_ar": {
+          "name": "question_ar",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "question_en": {
+          "name": "question_en",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "answer_ar": {
+          "name": "answer_ar",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "answer_en": {
+          "name": "answer_en",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "main_content_ar": {
+          "name": "main_content_ar",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "main_content_en": {
+          "name": "main_content_en",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "essence_for_dharna_ar": {
+          "name": "essence_for_dharna_ar",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "essence_for_dharna_en": {
+          "name": "essence_for_dharna_en",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "blessing_ar": {
+          "name": "blessing_ar",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "blessing_en": {
+          "name": "blessing_en",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "slogan_ar": {
+          "name": "slogan_ar",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "slogan_en": {
+          "name": "slogan_en",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "avyakt_signal_ar": {
+          "name": "avyakt_signal_ar",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "avyakt_signal_en": {
+          "name": "avyakt_signal_en",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "song_title": {
+          "name": "song_title",
+          "type": "varchar(300)",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "song_url": {
+          "name": "song_url",
+          "type": "varchar(500)",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "published": {
+          "name": "published",
+          "type": "boolean",
+          "primaryKey": false,
+          "notNull": false,
+          "default": false
+        },
+        "created_by": {
+          "name": "created_by",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "created_at": {
+          "name": "created_at",
+          "type": "timestamp",
+          "primaryKey": false,
+          "notNull": false,
+          "default": "now()"
+        },
+        "updated_at": {
+          "name": "updated_at",
+          "type": "timestamp",
+          "primaryKey": false,
+          "notNull": false,
+          "default": "now()"
+        }
+      },
+      "indexes": {},
+      "foreignKeys": {},
+      "compositePrimaryKeys": {},
+      "uniqueConstraints": {
+        "murlis_date_unique": {
+          "name": "murlis_date_unique",
+          "nullsNotDistinct": false,
+          "columns": [
+            "date"
+          ]
+        }
+      },
+      "policies": {},
+      "checkConstraints": {},
+      "isRLSEnabled": false
+    }
+  },
+  "enums": {},
+  "schemas": {},
+  "sequences": {},
+  "roles": {},
+  "policies": {},
+  "views": {},
+  "_meta": {
+    "columns": {},
+    "schemas": {},
+    "tables": {}
+  }
+}

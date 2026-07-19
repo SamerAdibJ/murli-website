@@ -1,6 +1,6 @@
 {
-  "id": "a6d59681-a399-488c-9984-e851cd7c54a4",
-  "prevId": "00000000-0000-0000-0000-000000000000",
+  "id": "2db2de53-59af-4fb7-b650-caf6e9e29bfe",
+  "prevId": "a6d59681-a399-488c-9984-e851cd7c54a4",
   "version": "7",
   "dialect": "postgresql",
   "tables": {
@@ -88,12 +88,6 @@
           "primaryKey": false,
           "notNull": false,
           "default": "now()"
-        },
-        "test_field": {
-          "name": "test_field",
-          "type": "varchar(100)",
-          "primaryKey": false,
-          "notNull": false
         }
       },
       "indexes": {},
