@@ -8,19 +8,33 @@ import {
   Patch,
   Post,
   Query,
+  UseGuards,
 } from '@nestjs/common';
 import { BlessingsService } from './blessings.service';
 import { CreateBlessingDto } from './dto/create-blessing.dto';
 import { UpdateBlessingDto } from './dto/update-blessing.dto';
 import { ok } from '../common/helpers/response';
-
+import { AuthGuard } from '../auth/guards/auth.guard';
+import { RolesGuard } from '../auth/guards/roles.guard';
+import { Roles } from '../auth/decorators/roles.decorator';
+import { GetUser } from '../auth/decorators/get-user.decorator';
+import { ApiBearerAuth } from '@nestjs/swagger';
+@ApiBearerAuth()
+@UseGuards(AuthGuard, RolesGuard)
+@Roles('admin')
 @Controller('blessings')
 export class BlessingsAdminController {
   constructor(private readonly blessingsService: BlessingsService) {}
 
   @Post()
-  async create(@Body() data: CreateBlessingDto) {
-    const card = await this.blessingsService.create(data);
+  async create(
+    @GetUser() user: { id: string | null },
+    @Body() data: CreateBlessingDto,
+  ) {
+    const card = await this.blessingsService.create({
+      ...data,
+      createdBy: user.id,
+    });
     return ok(card, 'Blessing card created successfully');
   }
 

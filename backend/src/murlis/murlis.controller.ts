@@ -7,12 +7,16 @@ import {
   ParseIntPipe,
   Patch,
   Post,
+  UseGuards,
 } from '@nestjs/common';
 import { MurlisService } from './murlis.service';
 import { CreateMurliDto } from './dto/create-murli.dto';
 import { UpdateMurliDto } from './dto/update-murli.dto';
 import { ok } from '../common/helpers/response';
-
+import { AuthGuard } from '../auth/guards/auth.guard';
+import { ApiBearerAuth } from '@nestjs/swagger';
+@ApiBearerAuth()
+@UseGuards(AuthGuard)
 @Controller('murli')
 export class MurlisController {
   constructor(private readonly murlisService: MurlisService) {}

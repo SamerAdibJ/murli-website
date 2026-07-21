@@ -13,6 +13,13 @@ import {
 
 export const murliTypeEnum = pgEnum('murli_type', ['morning', 'avyakt']);
 
+export const roleEnum = pgEnum('user_role', ['member', 'admin']);
+export const statusEnum = pgEnum('user_status', [
+  'pending',
+  'active',
+  'rejected',
+]);
+
 export const murlis = pgTable('murlis', {
   id: serial('id').primaryKey(),
   date: date('date').notNull().unique(),
@@ -84,3 +91,26 @@ export const bookmarks = pgTable(
     uniqueUserMurli: unique().on(table.userId, table.murliId),
   }),
 );
+
+export const users = pgTable('users', {
+  id: text('id').primaryKey(),
+  firstName: varchar('first_name', { length: 100 }).notNull(),
+  lastName: varchar('last_name', { length: 100 }).notNull(),
+  email: varchar('email', { length: 255 }).notNull().unique(),
+  passwordHash: text('password_hash').notNull(),
+  role: roleEnum('role').notNull().default('member'),
+  status: statusEnum('status').notNull().default('pending'),
+  emailVerified: boolean('email_verified').notNull().default(false),
+  createdAt: timestamp('created_at').defaultNow(),
+  updatedAt: timestamp('updated_at').defaultNow(),
+});
+
+export const refreshTokens = pgTable('refresh_tokens', {
+  id: text('id').primaryKey(),
+  userId: text('user_id')
+    .notNull()
+    .references(() => users.id, { onDelete: 'cascade' }),
+  tokenHash: text('token_hash').notNull(),
+  expiresAt: timestamp('expires_at').notNull(),
+  createdAt: timestamp('created_at').defaultNow(),
+});

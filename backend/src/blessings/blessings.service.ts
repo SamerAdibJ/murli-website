@@ -46,7 +46,7 @@ export class BlessingsService {
       .set({
         ...data,
         updatedAt: new Date(),
-      } as typeof blessingCards.$inferInsert)
+      })
       .where(eq(blessingCards.id, id))
       .returning();
 

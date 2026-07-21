@@ -1,7 +1,13 @@
-import { Controller, Get, Query } from '@nestjs/common';
+import { Controller, Get, Query, UseGuards } from '@nestjs/common';
 import { MurlisService } from './murlis.service';
 import { ok } from '../common/helpers/response';
-
+import { ApiBearerAuth } from '@nestjs/swagger';
+import { RolesGuard } from '../auth/guards/roles.guard';
+import { AuthGuard } from '../auth/guards/auth.guard';
+import { Roles } from '../auth/decorators/roles.decorator';
+@ApiBearerAuth()
+@UseGuards(AuthGuard, RolesGuard)
+@Roles('admin')
 @Controller('murlis')
 export class MurlisListController {
   constructor(private readonly murlisService: MurlisService) {}

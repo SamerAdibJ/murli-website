@@ -57,6 +57,20 @@
       "when": 1784449510462,
       "tag": "0007_nice_living_tribunal",
       "breakpoints": true
+    },
+    {
+      "idx": 8,
+      "version": "7",
+      "when": 1784451314522,
+      "tag": "0008_yummy_lily_hollister",
+      "breakpoints": true
+    },
+    {
+      "idx": 9,
+      "version": "7",
+      "when": 1784547314440,
+      "tag": "0009_light_gorilla_man",
+      "breakpoints": true
     }
   ]
 }

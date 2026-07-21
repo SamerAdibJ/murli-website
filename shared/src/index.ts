@@ -2,16 +2,19 @@
 // Import in frontend/backend as: import { User } from 'shared'
 
 export type Role = "admin" | "member";
-export type UserStatus = "active" | "inactive" | "pending";
+export type UserStatus = "pending" | "active" | "rejected";
 export type MurliType = "morning" | "avyakt";
 
 export interface User {
 	id: string;
+	firstName: string;
+	lastName: string;
 	email: string;
-	displayName: string;
 	role: Role;
 	status: UserStatus;
+	emailVerified: boolean;
 	createdAt: string;
+	updatedAt: string;
 }
 
 export interface MurliResponse {
@@ -160,4 +163,25 @@ export interface ApiResponse<T> {
 export interface AuthResponse {
 	user: User;
 	token: string;
+}
+
+export interface LoginResponse {
+	accessToken: string;
+	refreshToken: string;
+	user: {
+		id: string;
+		firstName: string;
+		lastName: string;
+		email: string;
+		role: Role;
+	};
+}
+
+export interface RefreshTokenDto {
+	refreshToken: string;
+}
+
+export interface RefreshTokenResponse {
+	accessToken: string;
+	refreshToken: string;
 }
