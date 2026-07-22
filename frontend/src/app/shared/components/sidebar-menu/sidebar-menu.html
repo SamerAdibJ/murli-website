@@ -1,9 +1,4 @@
-<div>
-  <h1 class="text-2xl">Daily Murli</h1>
-  <ul>
-    <li>Today's Murli</li>
-    <li>Blessing card</li>
-    <li>Bookmarks</li>
-    <li>Profile</li>
-  </ul>
+<div class="flex h-full flex-col justify-between pb-5">
+  <p-menu [model]="sidebarMenu()" />
+  <p-menu [model]="profileMenu()" />
 </div>

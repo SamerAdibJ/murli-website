@@ -1,29 +1,51 @@
 import { Routes } from '@angular/router';
 
 export const routes: Routes = [
+  // {
+  //   path: 'login',
+  //   loadComponent: () => import('./pages/login/login.component').then((m) => m.LoginComponent),
+  // },
+  // {
+  //   path: 'register',
+  //   loadComponent: () =>
+  //     import('./pages/register/register.component').then((m) => m.RegisterComponent),
+  // },
   {
     path: '',
-    loadComponent: () =>
-      import('./pages/today-murli/today-murli.component').then((m) => m.TodayMurliComponent),
-  },
-  {
-    path: 'blessing',
-    loadComponent: () =>
-      import('./pages/blessing-card/blessing-card.component').then((m) => m.BlessingCardComponent),
-  },
-  {
-    path: 'bookmarks',
-    loadComponent: () =>
-      import('./pages/bookmarks/bookmarks.component').then((m) => m.BookmarksComponent),
-  },
-  {
-    path: 'profile',
-    loadComponent: () =>
-      import('./pages/profile/profile.component').then((m) => m.ProfileComponent),
-  },
-  {
-    path: 'members',
-    loadComponent: () =>
-      import('./pages/members/members.component').then((m) => m.MembersComponent),
+    loadComponent: () => import('./shell/shell').then((m) => m.ShellComponent),
+    children: [
+      {
+        path: 'murli',
+        pathMatch: 'full',
+        loadComponent: () =>
+          import('./pages/today-murli/today-murli.component').then((m) => m.TodayMurliComponent),
+      },
+      {
+        path: 'blessing',
+        loadComponent: () =>
+          import('./pages/blessing-card/blessing-card.component').then(
+            (m) => m.BlessingCardComponent,
+          ),
+      },
+      {
+        path: 'bookmarks',
+        loadComponent: () =>
+          import('./pages/bookmarks/bookmarks.component').then((m) => m.BookmarksComponent),
+      },
+      {
+        path: 'profile',
+        loadComponent: () =>
+          import('./pages/profile/profile.component').then((m) => m.ProfileComponent),
+      },
+      {
+        path: 'members',
+        loadComponent: () =>
+          import('./pages/members/members.component').then((m) => m.MembersComponent),
+      },
+      {
+        path: 'settings',
+        loadComponent: () => import('./pages/settings/settings.component').then((m) => m.Settings),
+      },
+    ],
   },
 ];

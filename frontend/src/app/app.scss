@@ -1,1 +1,17 @@
+::ng-deep {
+  .p-menu {
+    border: none;
+  }
+  .p-drawer-content {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+  }
 
+  .p-drawer-header {
+    display: flex;
+    justify-content: flex-end;
+    align-items: center;
+    padding: 0;
+  }
+}

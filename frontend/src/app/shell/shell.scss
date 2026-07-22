@@ -1,0 +1,13 @@
+:host {
+  display: contents;
+}
+.mobile-bottom-nav {
+  position: fixed;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  height: 72px;
+  background: var(--surface-card);
+  border-top: 1px solid var(--surface-border);
+  z-index: 1000;
+}

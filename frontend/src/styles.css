@@ -1,1 +1,27 @@
 @import "tailwindcss";
+@import "primeicons/primeicons.css";
+@import "tailwindcss-primeui";
+
+:root {
+  --color-primary-50: #faf5ef;
+  --color-primary-100: #f3e9d8;
+  --color-primary-200: #e7d3b1;
+  --color-primary-300: #d9b98a;
+  --color-primary-400: #d2b991;
+  --color-primary-500: #c4a070;
+  --color-primary-600: #b08a5a;
+  --color-primary-700: #9a7448;
+  --color-primary-800: #84603a;
+  --color-primary-900: #6e4e2e;
+
+  --color-accent-50: #fef2f2;
+  --color-accent-100: #fee2e2;
+  --color-accent-200: #fecaca;
+  --color-accent-300: #fca5a5;
+  --color-accent-400: #f87171;
+  --color-accent-500: #ef4444;
+  --color-accent-600: #dc2626;
+  --color-accent-700: #c62828;
+  --color-accent-800: #991b1b;
+  --color-accent-900: #7f1d1d;
+}
