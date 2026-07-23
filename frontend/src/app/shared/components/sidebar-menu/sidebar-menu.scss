@@ -21,4 +21,7 @@
       color: var(--p-text-color);
     }
   }
+  .p-dark .p-menu-item:not(.p-disabled) .p-menu-item-content:hover .p-menu-item-icon {
+    color: white;
+  }
 }

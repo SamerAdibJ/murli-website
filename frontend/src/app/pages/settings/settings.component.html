@@ -1,3 +1,6 @@
-<button (click)="layout.toggleDarkMode()">
-  {{ layout.darkMode() ? '☀️' : '🌙' }}
+<button (click)="appService.toggleDarkMode()">
+  {{ appService.darkMode() ? 'Light mode ☀️' : 'Dark mode 🌙' }}
+</button>
+<button (click)="appService.toggleRtl()">
+  {{ appService.isRtl() ? 'Switch to English' : ' الانتقال الى العربية' }}
 </button>

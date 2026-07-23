@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { LayoutService } from '../../shared/services/layout.service';
+import { AppService } from '../../shared/services/app.service';
 
 @Component({
   selector: 'app-settings',
@@ -8,5 +8,5 @@ import { LayoutService } from '../../shared/services/layout.service';
   styleUrl: './settings.component.scss',
 })
 export class Settings {
-  constructor(public layout: LayoutService) {}
+  constructor(public appService: AppService) {}
 }

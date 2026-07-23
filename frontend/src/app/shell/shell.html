@@ -1,4 +1,4 @@
-<div class="flex min-h-screen" [dir]="layout.dir()">
+<div class="flex h-full flex-column max-md:space-between" [dir]="appService.dir()">
   <!-- Desktop sidebar -->
   <aside class="w-64 min-w-64 flex flex-col border-e border-amber-950 max-md:hidden">
     <div class="p-4 font-bold text-lg">Morning Murli</div>
@@ -11,9 +11,7 @@
   </main>
 
   <!-- Mobile bottom nav -->
-  <div
-    class="hidden max-md:flex fixed bottom-0 inset-x-0 h-16 bg-surface-card border-t surface-border z-100 mobile-bottom-nav"
-  >
+  <div class="hidden max-md:flex fixed bottom-0 inset-x-0 h-16 bg-surface-card z-100">
     <app-bottom-nav class="w-full" />
   </div>
 </div>

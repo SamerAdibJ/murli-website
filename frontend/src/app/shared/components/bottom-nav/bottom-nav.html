@@ -1,7 +1,7 @@
 <nav
-  class="flex items-stretch justify-around h-full rounded-3xl backdrop-blur-2xl border border-surface shadow-lg"
+  class="flex items-stretch justify-between h-full border-0 shaddow-xl backdrop-blur-2xl shadow-lg mx-1 -mt-2"
 >
-  @for (item of layout.bottomNavItems; track item.route) {
+  @for (item of appService.bottomNavItems(); track item.route) {
     <a
       [routerLink]="item.route"
       routerLinkActive="text-primary font-semibold"

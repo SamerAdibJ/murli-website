@@ -15,6 +15,11 @@ export const routes: Routes = [
     loadComponent: () => import('./shell/shell').then((m) => m.ShellComponent),
     children: [
       {
+        path: '',
+        redirectTo: '/murli',
+        pathMatch: 'full',
+      },
+      {
         path: 'murli',
         pathMatch: 'full',
         loadComponent: () =>

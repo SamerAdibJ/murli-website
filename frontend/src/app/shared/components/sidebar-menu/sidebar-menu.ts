@@ -1,6 +1,6 @@
 import { Component, computed } from '@angular/core';
 import { MenuModule } from 'primeng/menu';
-import { LayoutService } from '../../services/layout.service';
+import { AppService } from '../../services/app.service';
 import { ButtonModule } from 'primeng/button';
 
 @Component({
@@ -11,11 +11,11 @@ import { ButtonModule } from 'primeng/button';
   styleUrl: './sidebar-menu.scss',
 })
 export class SidebarMenuComponent {
-  constructor(public layout: LayoutService) {}
+  constructor(public appService: AppService) {}
 
   sidebarMenu = computed(() => [
     {
-      items: this.layout.navItems.map((item) => ({
+      items: this.appService.navItems.map((item) => ({
         label: item.label,
         icon: item.icon,
         routerLink: item.route,
@@ -26,7 +26,7 @@ export class SidebarMenuComponent {
   profileMenu = computed(() => [
     {
       label: 'Account',
-      items: this.layout.profile.map((item) => ({
+      items: this.appService.sidebarProfile().map((item) => ({
         label: item.label,
         icon: item.icon,
         routerLink: item.route,

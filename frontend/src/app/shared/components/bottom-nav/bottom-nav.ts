@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
 import { RouterLink, RouterLinkActive } from '@angular/router';
-import { LayoutService } from '../../services/layout.service';
+import { AppService } from '../../services/app.service';
 import { CommonModule } from '@angular/common';
 
 @Component({
@@ -11,5 +11,5 @@ import { CommonModule } from '@angular/common';
   styleUrl: './bottom-nav.scss',
 })
 export class BottomNavComponent {
-  constructor(public layout: LayoutService) {}
+  constructor(public appService: AppService) {}
 }
