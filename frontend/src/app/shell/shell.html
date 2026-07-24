@@ -1,4 +1,7 @@
 <div class="flex h-full flex-column max-md:space-between" [dir]="appService.dir()">
+  <!-- <div class="auth-toolbar"> -->
+  <app-theme-lang-toggle />
+  <!-- </div> -->
   <!-- Desktop sidebar -->
   <aside class="w-64 min-w-64 flex flex-col border-e border-amber-950 max-md:hidden">
     <div class="p-4 font-bold text-lg">Morning Murli</div>
@@ -6,7 +9,7 @@
   </aside>
 
   <!-- Main content area -->
-  <main class="flex-1 overflow-y-auto p-6 pb-20 md:pb-6">
+  <main class="flex-1 overflow-y-auto pb-20 md:pb-6">
     <router-outlet />
   </main>
 

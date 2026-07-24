@@ -1,0 +1,89 @@
+<div class="signup-page">
+  <div class="auth-toolbar">
+    <app-theme-lang-toggle />
+  </div>
+  <p-card styleClass="signup-card">
+    <ng-template #title>
+      <div class="signup-header">
+        <div class="signup-icon">
+          <i class="pi pi-book text-3xl text-primary"></i>
+        </div>
+        <h1 class="signup-title">Create Account</h1>
+        <p class="signup-desc">Join the Murli community</p>
+      </div>
+    </ng-template>
+
+    <ng-template #content>
+      <form [formGroup]="signupForm" (ngSubmit)="onSubmit()" class="signup-form">
+        <div class="form-row">
+          <app-form-field label="First Name" controlId="firstName" [error]="errorFor('firstName')">
+            <input pInputText id="firstName" formControlName="firstName" placeholder="First name" />
+          </app-form-field>
+          <app-form-field label="Last Name" controlId="lastName" [error]="errorFor('lastName')">
+            <input pInputText id="lastName" formControlName="lastName" placeholder="Last name" />
+          </app-form-field>
+        </div>
+
+        <app-form-field label="Email" controlId="email" [error]="errorFor('email')">
+          <input
+            pInputText
+            id="email"
+            formControlName="email"
+            placeholder="Your email address"
+            type="email"
+          />
+        </app-form-field>
+
+        <app-form-field label="Country" controlId="country" [error]="errorFor('country')">
+          <p-select
+            id="country"
+            formControlName="country"
+            [options]="countries"
+            optionLabel="name"
+            optionValue="code"
+            placeholder="Select your country"
+            [showClear]="true"
+          />
+        </app-form-field>
+
+        <div class="form-row">
+          <app-form-field label="Password" controlId="password" [error]="errorFor('password')">
+            <p-password
+              id="password"
+              formControlName="password"
+              [toggleMask]="true"
+              [feedback]="true"
+              placeholder="Create a password"
+            />
+          </app-form-field>
+          <app-form-field
+            label="Confirm Password"
+            controlId="repeatPassword"
+            [error]="errorFor('repeatPassword') || formError"
+          >
+            <p-password
+              id="repeatPassword"
+              formControlName="repeatPassword"
+              [toggleMask]="true"
+              [feedback]="false"
+              placeholder="Repeat password"
+            />
+          </app-form-field>
+        </div>
+
+        <p-button
+          type="submit"
+          label="Create Account"
+          icon="pi pi-user-plus"
+          class="signup-btn flex justify-center"
+          [disabled]="submitted && signupForm.invalid"
+        />
+
+        <div class="signup-footer">
+          <span>Already have an account?</span>
+          <a routerLink="/signin">Sign in</a>
+        </div>
+      </form>
+    </ng-template>
+  </p-card>
+</div>

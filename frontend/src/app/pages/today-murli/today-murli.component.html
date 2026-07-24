@@ -1,9 +1,10 @@
-<div>
-  <h1 class="my-2 text-2xl">
+<div class="flex flex-col h-full">
+  <h1 class="my-4 text-2xl shrink-0 text-center">
     📅 Murli, <span>{{ today | date: 'EEE MMM d y' }}</span>
   </h1>
-  <p-tabs value="full" class="border-red-400">
-    <p-tablist>
+
+  <p-tabs value="full" class="flex-1 flex flex-col min-h-0 border-red-400">
+    <p-tablist class="shrink-0">
       @for (tab of tabHeaders; track tab.id) {
         <p-tab [value]="tab.id" class="flex justify-between items-center text-primary-500">
           <i [class]="tab.icon"></i>
@@ -11,189 +12,21 @@
         </p-tab>
       }
     </p-tablist>
-    <p-tabpanels>
+
+    <p-tabpanels class="flex-1 min-h-0 overflow-y-auto p-6!">
       <p-tabpanel value="full">
-        <!-- <app-full-murli /> -->
-        <h1>Murli component with full text</h1>
-        <p>
-          Essence: Sweet children, this land of Bharat is the birthplace of the incorporeal Father.
-          It is here that the Father comes to teach you Raja Yoga, to give you your sovereignty and
-          to serve you. Question: What promise does Shiv Baba have each of His children make?
-          Answer: Sweet children, promise Baba that you will not perform any sinful actions. You are
-          donating the five vices. Have the concern inside you that, if you take back anything that
-          you have given as a donation, you will accumulate a lot of sin, the punishment for which
-          is severe. The story of King Harishchandra is based on this. Om shanti. This is the Godly
-          student life of you children. You children know that you have come to Him. He comes and
-          gives you children of Bharat your fortune of the kingdom every cycle. He only comes in
-          Bharat. This is the land of Bharat. One has a lot of love and regard for one’s own land.
-          When an important person from abroad dies here, he is taken back home and when an
-          important person from here dies abroad, his body is brought back here. There is that much
-          regard for one’s own land. Bharat is called God’s birthplace. You know that you are now
-          sitting in front of the One whom you call God, Allah, the Supreme Soul. There definitely
-          has to be a name. Even though they speak of Allah, they still worship the oval image.
-          Since they speak of Ishwar and Khuda, there have to be signs of Him. People everywhere
-          worship an oval image. In pictures of the deities, they put in front of them an image of
-          the Supreme Father, the Supreme Soul, in the form of an oval image. He is the highest of
-          all. He doesn’t have a body of His own and this is why He is called the Incorporeal. He is
-          not corporeal. You children now know that you become present in front of Him every cycle
-          in order to receive teachings from Him. Since there are the versions of God, He must
-          surely be teaching Raja Yoga. Raja Yoga was taught to the students and they then became
-          kings and queens. There was no question of a war, etc. Lakshmi and Narayan did not attain
-          their kingdom by battling; not at all. People of the world don’t know at all how they
-          attained their kingdom of the golden age. You children understand that you are now
-          claiming the kingdom from the Father and that you are personally sitting in front of Him.
-          That One is Baba, not Shri Krishna. Shri Krishna is a young child; he is a creation. Shri
-          Krishna is truly claiming his status now so that he will be called Shri Krishna in the
-          future. All of this is a matter of studying. You know that Baba is teaching you Raja Yoga,
-          just as human beings teach other human beings and make them barristers and engineers. They
-          are human beings. You understand that you too are human beings, but that you are impure.
-          The Father is now making you pure and also giving you your inheritance. That new world
-          will be a pure world. There is the kingdom in that new world. You are now sitting
-          personally in front of the Father. Just as a worldly father sits with his children and
-          explains to them with love, so, here, this is the unique Father from beyond this world to
-          whom you have been singing: “You are the Mother and You are the Father.” You know that
-          that One, whom we remember on the path of devotion, is playing His part at this time. You
-          say that you have come to Shiv Baba. You even write a letter: Shiv Baba c/o Brahma. If you
-          were to show this post to others they would be amazed. They would never have heard of any
-          such thing as: Shiv Baba c/o Brahma. Shiv Baba enters Brahma and establishes the land of
-          Vishnu. He is standing in the front and Shiv Baba is up above. Shiv Baba had carried out
-          establishment through Brahma and is now doing that once again. This is the family path.
-          When law is being taught as a higher education, both males and females study. Even females
-          become judges, barristers, doctors, etc. This is the family path. The path of sannyasis is
-          that of isolation and is a different thing. Baba has also explained that, if it weren’t
-          for Shankaracharya, there wouldn’t be any trace of purity in Bharat. Bharat would have
-          been completely burnt. Therefore, that is fixed in order to support Bharat. Bharat was
-          very pure and it then became impure. Bharat is now so poverty-stricken! People say that
-          the golden Lanka sank beneath the sea. However, there cannot be a Lanka of gold. They just
-          wrote stories through which there has been no benefit. You children know that Baba is
-          truly making you very elevated with the power of this completely easy remembrance. The
-          Father promises that if you make effort to stay in constant remembrance, your sins will be
-          absolved. You also made effort to stay in remembrance on the path of devotion. Why do they
-          remember God? So that they can have visions. They don’t think that they will receive a
-          kingdom in the land of Krishna by remembering God or that they will become Narayan from an
-          ordinary man; no. Even you didn’t have any hope of changing from a human being into a
-          deity. It is remembered that it didn’t take God long to change humans into deities. You
-          can see that there really will be that golden age after this iron age. There are so many
-          people in this iron age. There will be one dharma in that golden age. You have now
-          received this knowledge of souls and the Supreme Soul. There isn’t a single human being in
-          the world who has this knowledge of souls. No one knows how a part of 84 births is
-          recorded in a soul. You would never have heard these words from anyone else. The Father is
-          the Ocean of Knowledge, the Purifier, the incorporeal One. You souls know that you are now
-          becoming charitable souls from impure souls. In the golden age, all are charitable souls.
-          Here, all are sinful souls. It isn’t that those who make many donations and perform a lot
-          of charity are charitable souls; no. Charitable souls are only in the golden age. People
-          here think that souls who make many donations are charitable souls. There, you won’t need
-          to donate anything or perform charity. No one there is poor. You are constantly charitable
-          souls there. You give your bodies, minds and wealth to the unlimited Father and this is
-          known as surrendering yourselves. The Father asks: Do I surrender first or do you? Baba
-          says: You surrender first, for only then can you receive your return of that for 21
-          births. You now understand these things very clearly, because you hear them directly. When
-          you are living at home, you receive the murlis there and so you hear them from a distance.
-          You are now personally sitting in front of the Father. The Father says: Children, I am
-          your Father. There is nothing of blind faith here. He is the Father and also the Teacher.
-          When you belong to the Father, He gives you teachings. Your intellects now have all of
-          this knowledge. The cycle of 84 births has been explained to you. Those who are not to
-          take 84 births will not understand this. You understand that you truly have been around
-          the cycle of 84 births and are now to return home. The Father says: You souls came
-          bodiless and you have to return home bodiless. You become pure souls and then go back. You
-          are making effort to become pure. You will become pure with the power of yoga, that is,
-          with the power of remembrance. The word “yoga” is from the scriptures. The right word is
-          remembrance. A wife remembers her husband and a husband remembers his wife. The meaning of
-          yoga is remembrance. The Father says: Constantly remember Me alone and break your
-          intellects’ yoga away from everyone else and connect it to Me, your Father. Remember Me!
-          The more you remember Me, the more your sins will be absolved. Truly, Bharat receives the
-          inheritance every cycle. The birthday of Shiva is very well known. Just as there are the
-          birthdays of Christ, Buddha, etc., similarly, there is the birthday of incorporeal Shiva.
-          He is therefore the highest of all. The birthday of Krishna is also well known, but no one
-          knows what he does when He comes here. Shri Krishna was a prince of the golden age.
-          Someone must definitely have taught him to perform such actions that he became a prince of
-          the golden age. A small child is pure anyway. There is no question of vice there. Children
-          are pure anyway. God is the only incorporeal One. God is One! All the rest are the
-          creation. A creation cannot receive the inheritance from a creation. The inheritance is
-          only received from the Father. A brother cannot receive the inheritance from a brother.
-          All of you are brothers. They speak of brotherhood. There is only the one Father and the
-          inheritance is received from Him. The Bestower of Salvation for all brothers is the one
-          Father. All souls are to receive the inheritance from the Father. The Father says: I come
-          and teach you souls and grant salvation to souls. The Father sits here and teaches you
-          Raja Yoga. You will not receive a status here from this study. Those people become
-          barristers, etc. in this birth. Then, in their next birth, they will study again. You know
-          that you attain a reward for 21 births through this study. There are no doctors, etc. in
-          the golden age; there is no illness there. There, you stay in the palace of a womb. Here,
-          you stay in the jail of a womb where a lot of punishment is experienced. This is why souls
-          call out: “Let me out of this jail; I will not make any mistakes again!” People promise
-          this to Dharamraj. Here, you have to promise Shiv Baba: Baba, I will never indulge in vice
-          again. I am giving You the five vices. The Father knows that the vices cannot be renounced
-          instantly just like that. There has to be the concern inside you that, if you take back
-          the vices you have donated, a lot of sin will then be accumulated. There is the example of
-          King Harishchandra. The Father knows that the five vices will not be renounced just like
-          that. No, it takes time. The war will begin when you reach your karmateet stage. These
-          five vices are your great enemies. In those too, the main one is body consciousness. It is
-          so difficult to donate that. The Father repeatedly tells you: Consider yourselves to be
-          souls and remember Me, your Father. However, this does not happen. When you become body
-          conscious, you are struck by the vice of lust. Body consciousness is the strongest of all.
-          Effort is required to become soul conscious. Sin has increased because of souls becoming
-          body conscious. The five vices have to be donated and it is this that takes time. The
-          brides cannot go back without the Bridegroom. First, the Bridegroom has to go and then the
-          brides will follow. The Bridegroom has to come and take all the souls back home. Effort
-          has to be made until you reach your karmateet stage. Mistakes are made when you become
-          body conscious. Some say: “Baba, I became body conscious and fell into vice.” Many storms
-          will come. There may be thoughts of vice, but you must not commit any sin with your
-          physical organs. So much effort has to be made to conquer Maya! The Father says: If you
-          are already married, then demonstrate how you remain pure, so that even the sannyasis will
-          see that it is possible to remain pure. Look how great the income you receive is! If you
-          demonstrate that you remain pure, you will attain a very high status. They will all
-          surrender themselves to you. Even Baba praises you. Perhaps you do remain pure, but yoga
-          is also needed. It is in yoga that there are constantly obstacles; there is body
-          consciousness. It is good that you remain pure; only with purity will you claim an
-          inheritance in that pure world. However, Maya will also show her force. Maya attacks a
-          great deal. The Father explains: All of that will happen. You show that courage but, along
-          with that, there also has to be constant remembrance, for only then will your sins be
-          absolved. Maya very much harasses those who become very powerful. Some are hardly able to
-          stay in remembrance. You should ask those who are able to stay in remembrance their
-          experience. “What do you think? How are you able to do this?” By staying in remembrance,
-          your sins will be absolved. This is something very new and unique. While sitting here, you
-          become intoxicated. You also understand that God, and not Shri Krishna, is the only
-          incorporeal One. They have written stories about Shri Krishna in the scriptures, about how
-          he was tied to a pole and how he did this and that. In fact, none of those things are
-          true. They just defame and insult him. Shri Krishna didn’t have any defects. To be
-          mischievous in that way would also be a defect. Shri Krishna was the highest being who
-          completely followed the highest code of conduct. His praise is sung: “Full of all
-          virtues…” They sing: “Guru Brahma, Guru Vishnu”, but you must tell them that you don’t
-          have a guru. We do not believe this one to be our guru or our God. Only the one
-          incorporeal One is the Purifier. No corporeal guru can be the Purifier. You have now come
-          to know the whole life story of the Supreme Father, the Supreme Soul. You have now come to
-          know from the Father what part Shiv Baba plays in 5000 years. The Father is
-          knowledge-full. He is the Ocean of Happiness, Peace and Bliss. This is His praise. The
-          Father has treasures. Therefore, He definitely gives them to the children too. Achcha. To
-          you sweetest, beloved, long-lost and now-found children, love, remembrance and good
-          morning from the Mother, the Father, BapDada. The spiritual Father says namaste to you
-          spiritual children. Essence for dharna: In order to attain the karmateet stage, don’t make
-          any mistakes with your physical organs. As well as remaining pure, also become strong in
-          remembrance. In order to be a constantly charitable soul, surrender your body, mind and
-          wealth to the Father. By surrendering yourself to the Father once, you become a charitable
-          soul for 21 births. Blessing: May you be perfect in every subject and make your yoga
-          natural and your nature. Just as there is no percentage in you being the Father’s
-          children, in the same way, let there be no percentage of yoga in your stage of a constant
-          and easy yogi. Let it become natural and your nature. Some people have a particular nature
-          and they continue to move along according to that nature even against their conscious
-          wish. In the same way, let this also become your nature. Finish all of the things of “What
-          can I do? How can I have yoga?” and you will then become perfect in every subject. Perfect
-          means to be free from any effect or defect. Slogan: If you want to tolerate something,
-          tolerate it happily, not out of compulsion. *** Om Shanti *** Avyakt signal: Stay in the
-          volcanic stage and experience powerful remembrance. Powerful yoga, that is, the fire of
-          love, the remembrance that is like fire, will destroy the fire of corruption and violence
-          and give co-operation to all souls. It is through this that your attitude of unlimited
-          disinterest will be ignited. On the one hand, the fire of remembrance will destroy that
-          fire and, on the other hand, it will give souls God’s message and cool them down. Through
-          this, souls will be liberated from the fire of their sins.
-        </p>
+        @for (section of avyaktSections; track section.title) {
+          <app-murli-section
+            [title]="section.title"
+            [subtitle]="section.subtitle"
+            [content]="section.content"
+          />
+        }
       </p-tabpanel>
       <p-tabpanel value="summary">
-        <!-- <app-murli-summary /> -->
         <h1>Murli component with summary text</h1>
       </p-tabpanel>
       <p-tabpanel value="song">
-        <!-- <app-murli-song /> -->
         <h1>Youtube video component</h1>
       </p-tabpanel>
     </p-tabpanels>

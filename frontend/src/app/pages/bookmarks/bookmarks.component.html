@@ -1,3 +1,40 @@
-<div class="page-container">
-  <h1>Bookmarks</h1>
+<div class="bookmarks-page">
+  <!-- Header -->
+  <div class="bookmarks-header">
+    <div>
+      <h1 class="bookmarks-title">🔖 My Bookmarks</h1>
+      <p class="bookmarks-count">{{ bookmarks.length }} saved</p>
+    </div>
+  </div>
+
+  <!-- List -->
+  @for (bookmark of bookmarks; track bookmark.id) {
+    <p-card class="bookmark-item">
+      <ng-template #content>
+        <div class="bookmark-content">
+          <div class="bookmark-info">
+            <span class="bookmark-date">{{ bookmark.date | date: 'dd MMM' }}</span>
+            <h3 class="bookmark-title-ar">{{ bookmark.titleAr }}</h3>
+            <span class="bookmark-meta">Bookmarked {{ daysAgo(bookmark.createdAt) }}</span>
+          </div>
+          <button
+            pButton
+            type="button"
+            icon="pi pi-times"
+            class="p-button-rounded p-button-text p-button-sm p-button-danger bookmark-remove"
+            (click)="onRemove(bookmark)"
+          ></button>
+        </div>
+      </ng-template>
+    </p-card>
+  } @empty {
+    <p-card class="bookmark-empty">
+      <ng-template #content>
+        <div class="flex flex-column align-items-center gap-2 py-4">
+          <i class="pi pi-bookmark text-4xl text-color-secondary" style="opacity: 0.4"></i>
+          <p class="text-color-secondary m-0">No bookmarks yet</p>
+        </div>
+      </ng-template>
+    </p-card>
+  }
 </div>

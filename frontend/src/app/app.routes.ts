@@ -1,15 +1,19 @@
 import { Routes } from '@angular/router';
 
 export const routes: Routes = [
-  // {
-  //   path: 'login',
-  //   loadComponent: () => import('./pages/login/login.component').then((m) => m.LoginComponent),
-  // },
-  // {
-  //   path: 'register',
-  //   loadComponent: () =>
-  //     import('./pages/register/register.component').then((m) => m.RegisterComponent),
-  // },
+  {
+    path: 'signin',
+    loadComponent: () => import('./pages/signin/signin').then((m) => m.Signin),
+  },
+  {
+    path: 'pending-approval',
+    loadComponent: () =>
+      import('./pages/pending-approval/pending-approval').then((m) => m.PendingApproval),
+  },
+  {
+    path: 'signup',
+    loadComponent: () => import('./pages/signup/signup').then((m) => m.Signup),
+  },
   {
     path: '',
     loadComponent: () => import('./shell/shell').then((m) => m.ShellComponent),

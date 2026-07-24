@@ -1,6 +1,50 @@
-<button (click)="appService.toggleDarkMode()">
-  {{ appService.darkMode() ? 'Light mode ☀️' : 'Dark mode 🌙' }}
-</button>
-<button (click)="appService.toggleRtl()">
-  {{ appService.isRtl() ? 'Switch to English' : ' الانتقال الى العربية' }}
-</button>
+<div class="settings-page">
+  <p-card class="settings-card">
+    <ng-template #title>
+      <div class="settings-header">
+        <h1 class="settings-title">Settings</h1>
+        <p class="settings-desc">Customize your experience</p>
+      </div>
+    </ng-template>
+
+    <ng-template #content>
+      <div class="settings-section">
+        <div class="settings-section-header">
+          <i class="pi pi-palette text-primary text-xl"></i>
+          <div>
+            <span class="settings-section-title">Appearance</span>
+            <span class="settings-section-desc">Choose between light and dark theme</span>
+          </div>
+        </div>
+        <p-selectButton
+          [options]="themeOptions"
+          optionLabel="label"
+          optionValue="value"
+          [ngModel]="appService.darkMode()"
+          (ngModelChange)="onThemeChange($event)"
+          class="w-full bg-primary-400"
+        />
+      </div>
+
+      <div class="settings-divider"></div>
+
+      <div class="settings-section">
+        <div class="settings-section-header">
+          <i class="pi pi-globe text-primary text-xl"></i>
+          <div>
+            <span class="settings-section-title">Language</span>
+            <span class="settings-section-desc">Switch between English and Arabic</span>
+          </div>
+        </div>
+        <p-selectButton
+          [options]="langOptions"
+          optionLabel="label"
+          optionValue="value"
+          [ngModel]="appService.isRtl()"
+          (ngModelChange)="onLangChange($event)"
+          styleClass="w-full"
+        />
+      </div>
+    </ng-template>
+  </p-card>
+</div>

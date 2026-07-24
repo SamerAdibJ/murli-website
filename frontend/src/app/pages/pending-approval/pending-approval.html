@@ -1,0 +1,31 @@
+<div class="pending-page">
+  <div class="auth-toolbar">
+    <app-theme-lang-toggle />
+  </div>
+  <p-card styleClass="pending-card">
+    <ng-template #content>
+      <div class="pending-body">
+        <div class="pending-icon">
+          <i class="pi pi-clock text-4xl text-primary"></i>
+        </div>
+        <h1 class="pending-title">Account Pending Approval</h1>
+        <p class="pending-desc">
+          Your account has been created and is awaiting administrator approval. You'll receive
+          access once an admin reviews your account.
+        </p>
+
+        <div class="pending-info">
+          <i class="pi pi-info-circle text-primary"></i>
+          <span>This usually doesn't take long. Check back soon.</span>
+        </div>
+
+        <p-button
+          label="Back to Sign In"
+          icon="pi pi-arrow-left"
+          styleClass="pending-btn"
+          routerLink="/signin"
+        />
+      </div>
+    </ng-template>
+  </p-card>
+</div>

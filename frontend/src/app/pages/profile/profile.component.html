@@ -1,3 +1,50 @@
-<div class="page-container">
-  <h1>Profile</h1>
+<div class="profile-page">
+  <p-card styleClass="profile-card">
+    <ng-template #content>
+      <!-- Avatar & Name -->
+      <div class="profile-head">
+        <div class="profile-avatar">
+          <span class="profile-initials">{{ initials }}</span>
+        </div>
+        <h1 class="profile-name">{{ displayName }}</h1>
+        <p class="profile-email">{{ user.email }}</p>
+        <div class="profile-meta">
+          <span class="profile-badge" [class.badge-admin]="user.role === 'admin'">
+            {{ user.role === 'admin' ? 'Admin' : 'Member' }}
+          </span>
+          <span class="profile-joined">Joined {{ joinDate }}</span>
+        </div>
+      </div>
+
+      <!-- Stats -->
+      <div class="profile-stats">
+        <div class="stat-card">
+          <i class="pi pi-bookmark-fill text-primary text-xl"></i>
+          <span class="stat-value">{{ user.bookmarks }}</span>
+          <span class="stat-label">Bookmarks</span>
+        </div>
+        <div class="stat-card">
+          <i class="pi pi-heart-fill text-red-400 text-xl"></i>
+          <span class="stat-value">{{ user.blessings }}</span>
+          <span class="stat-label">Blessings</span>
+        </div>
+      </div>
+
+      <!-- Actions -->
+      <div class="profile-actions flex justify-between">
+        <p-button
+          label="Change Password"
+          icon="pi pi-lock"
+          styleClass="p-button-outlined action-btn"
+          (click)="onChangePassword()"
+        />
+        <p-button
+          label="Delete Account"
+          icon="pi pi-trash"
+          styleClass="p-button-outlined p-button-danger action-btn"
+          (click)="onDeleteAccount()"
+        />
+      </div>
+    </ng-template>
+  </p-card>
 </div>

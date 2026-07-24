@@ -9,9 +9,9 @@ export interface NavItem {
 
 @Injectable({ providedIn: 'root' })
 export class AppService {
-  private _isRtl = signal(false);
-  private _darkMode = signal(true);
-  private _role = signal<'member' | 'admin'>('member'); // ← default to member
+  private _isRtl = signal(localStorage.getItem('isRtl') === 'true');
+  private _darkMode = signal(localStorage.getItem('darkMode') === 'true');
+  private _role = signal<'member' | 'admin'>('member');
 
   readonly isRtl = this._isRtl.asReadonly();
   readonly darkMode = this._darkMode.asReadonly();
@@ -23,6 +23,12 @@ export class AppService {
   constructor() {
     effect(() => {
       document.documentElement.classList.toggle('p-dark', this._darkMode());
+      localStorage.setItem('darkMode', String(this._darkMode()));
+    });
+
+    effect(() => {
+      document.documentElement.dir = this.dir();
+      localStorage.setItem('isRtl', String(this._isRtl()));
     });
   }
 

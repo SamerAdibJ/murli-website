@@ -1,0 +1,53 @@
+<div class="signin-page">
+  <div class="auth-toolbar">
+    <app-theme-lang-toggle />
+  </div>
+  <p-card styleClass="signin-card">
+    <ng-template #title>
+      <div class="signin-header">
+        <div class="signin-icon">
+          <i class="pi pi-user text-3xl text-primary"></i>
+        </div>
+        <h1 class="signin-title">Welcome Back</h1>
+        <p class="signin-desc">Sign in to your account</p>
+      </div>
+    </ng-template>
+
+    <ng-template #content>
+      <form [formGroup]="signinForm" (ngSubmit)="onSubmit()" class="signin-form">
+        <app-form-field label="Email" controlId="email" [error]="errorFor('email')">
+          <input
+            pInputText
+            id="email"
+            formControlName="email"
+            placeholder="Your email address"
+            type="email"
+          />
+        </app-form-field>
+
+        <app-form-field label="Password" controlId="password" [error]="errorFor('password')">
+          <p-password
+            id="password"
+            formControlName="password"
+            [toggleMask]="true"
+            [feedback]="true"
+            placeholder="Enter your password"
+          />
+        </app-form-field>
+
+        <p-button
+          type="submit"
+          label="Sign In"
+          icon="pi pi-arrow-right"
+          class="signin-btn flex justify-center"
+          [disabled]="submitted && signinForm.invalid"
+        />
+
+        <div class="signin-footer">
+          <span>Don't have an account?</span>
+          <a routerLink="/signup">Create one</a>
+        </div>
+      </form>
+    </ng-template>
+  </p-card>
+</div>

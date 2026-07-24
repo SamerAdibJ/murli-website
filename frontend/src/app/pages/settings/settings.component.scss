@@ -1,0 +1,82 @@
+.settings-page {
+  padding: 2rem;
+  max-width: 600px;
+  margin: 0 auto;
+}
+
+.settings-card {
+  border-radius: 1.25rem !important;
+  box-shadow: 0 4px 24px rgba(0, 0, 0, 0.08) !important;
+
+  :root.p-dark & {
+    box-shadow: 0 4px 24px rgba(0, 0, 0, 0.4) !important;
+  }
+
+  .p-card-body { padding: 2.5rem; }
+  .p-card-content { padding: 0; }
+}
+
+.settings-header {
+  margin-bottom: 2rem;
+}
+
+.settings-title {
+  font-size: 1.5rem;
+  font-weight: 700;
+  margin: 0 0 0.25rem;
+  color: var(--p-text-color);
+}
+
+.settings-desc {
+  margin: 0;
+  color: var(--p-text-muted-color);
+  font-size: 0.9375rem;
+}
+
+.settings-section {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}
+
+.settings-section-header {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+
+  div {
+    display: flex;
+    flex-direction: column;
+    gap: 0.125rem;
+  }
+}
+
+.settings-section-title {
+  font-weight: 600;
+  font-size: 0.9375rem;
+  color: var(--p-text-color);
+}
+
+.settings-section-desc {
+  font-size: 0.8125rem;
+  color: var(--p-text-muted-color);
+}
+
+.settings-divider {
+  height: 1px;
+  background: var(--p-content-border-color);
+  margin: 1.5rem 0;
+}
+
+::ng-deep {
+  .settings-card .p-selectbutton {
+    display: flex;
+
+    .p-togglebutton {
+      flex: 1;
+      justify-content: center;
+      padding: 0.75rem;
+      font-size: 0.9375rem;
+    }
+  }
+}

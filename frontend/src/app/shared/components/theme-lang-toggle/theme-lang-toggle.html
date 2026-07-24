@@ -1,0 +1,21 @@
+<div class="flex gap-2">
+  <button
+    pButton
+    type="button"
+    [icon]="appService.darkMode() ? 'pi pi-sun' : 'pi pi-moon'"
+    [pTooltip]="appService.darkMode() ? 'Switch to Light' : 'Switch to Dark'"
+    tooltipPosition="bottom"
+    class="p-button-rounded p-button-text p-button-sm w-2rem h-2rem"
+    (click)="appService.toggleDarkMode()"
+  ></button>
+  <button
+    pButton
+    type="button"
+    icon="pi pi-globe"
+    [label]="appService.isRtl() ? 'EN' : 'AR'"
+    [pTooltip]="appService.isRtl() ? 'Switch to English' : 'التبديل إلى العربية'"
+    tooltipPosition="bottom"
+    class="p-button-rounded p-button-text p-button-sm"
+    (click)="appService.toggleRtl()"
+  ></button>
+</div>
