@@ -14,7 +14,12 @@
     </ng-template>
 
     <ng-template #content>
-      <form [formGroup]="signupForm" (ngSubmit)="onSubmit()" class="signup-form">
+      <form
+        [formGroup]="signupForm"
+        (ngSubmit)="onSubmit()"
+        (input)="wasError = false"
+        class="signup-form"
+      >
         <div class="form-row">
           <app-form-field label="First Name" controlId="firstName" [error]="errorFor('firstName')">
             <input pInputText id="firstName" formControlName="firstName" placeholder="First name" />
@@ -75,8 +80,9 @@
           type="submit"
           label="Create Account"
           icon="pi pi-user-plus"
+          [loading]="loading"
           class="signup-btn flex justify-center"
-          [disabled]="submitted && signupForm.invalid"
+          [disabled]="(submitted && signupForm.invalid) || loading || wasError"
         />
 
         <div class="signup-footer">

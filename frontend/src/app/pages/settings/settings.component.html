@@ -45,6 +45,16 @@
           styleClass="w-full"
         />
       </div>
+      <div class="settings-divider"></div>
+
+      <div class="settings-section">
+        <p-button
+          label="Sign Out"
+          icon="pi pi-sign-out"
+          styleClass="p-button-outlined w-full p-3 border-round-lg"
+          (click)="confirmLogout($event)"
+        />
+      </div>
     </ng-template>
   </p-card>
 </div>

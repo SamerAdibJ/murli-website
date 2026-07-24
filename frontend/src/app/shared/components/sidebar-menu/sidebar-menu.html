@@ -1,4 +1,13 @@
 <div class="flex h-full flex-col justify-between pb-5">
   <p-menu [model]="sidebarMenu()" />
-  <p-menu [model]="profileMenu()" />
+  <div class="px-3">
+    <p-menu [model]="profileMenu()" />
+
+    <p-button
+      label="Sign Out"
+      icon="pi pi-sign-out"
+      styleClass="p-button-text p-button-md mx-3 justify-content-start text-color-secondary"
+      (click)="confirmLogout($event)"
+    />
+  </div>
 </div>

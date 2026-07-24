@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, signal } from '@angular/core';
 import {
   FormBuilder,
   FormGroup,
@@ -14,6 +14,8 @@ import { SelectModule } from 'primeng/select';
 import { ButtonModule } from 'primeng/button';
 import { CardModule } from 'primeng/card';
 import { AppService } from '../../shared/services/app.service';
+import { MessageService } from 'primeng/api';
+import { AuthService } from '../../shared/services/auth.service';
 import { FormField } from '../../shared/components/form-field/form-field';
 import { ThemeLangToggle } from '../../shared/components/theme-lang-toggle/theme-lang-toggle';
 
@@ -59,11 +61,15 @@ function passwordMatchValidator(control: AbstractControl): ValidationErrors | nu
 export class Signup {
   signupForm!: FormGroup;
   submitted = false;
+  loading = false;
+  wasError = false;
 
   constructor(
     private fb: FormBuilder,
     private router: Router,
     public appService: AppService,
+    private authService: AuthService,
+    private messageService: MessageService,
   ) {
     this.signupForm = this.fb.nonNullable.group(
       {
@@ -118,10 +124,28 @@ export class Signup {
   }
 
   onSubmit(): void {
+    if (this.wasError) return;
     this.submitted = true;
-    if (this.signupForm.valid) {
-      console.log('Signup payload:', this.signupForm.value);
-      this.router.navigate(['/pending-approval']);
-    }
+    if (this.signupForm.invalid) return;
+
+    this.loading = true;
+    const { country, repeatPassword, ...payload } = this.signupForm.value;
+    this.authService.register(payload).subscribe({
+      next: () => {
+        this.authService.setPendingApproval(true);
+        this.router.navigate(['/pending-approval']);
+      },
+      error: (err) => {
+        this.loading = false;
+        this.wasError = true;
+        this.messageService.clear();
+        this.messageService.add({
+          severity: 'error',
+          summary: 'Registration Failed',
+          detail: err.error?.message || 'Please try again.',
+          life: 4000,
+        });
+      },
+    });
   }
 }

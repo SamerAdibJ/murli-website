@@ -14,7 +14,12 @@
     </ng-template>
 
     <ng-template #content>
-      <form [formGroup]="signinForm" (ngSubmit)="onSubmit()" class="signin-form">
+      <form
+        [formGroup]="signinForm"
+        (ngSubmit)="onSubmit()"
+        (input)="wasError = false"
+        class="signin-form"
+      >
         <app-form-field label="Email" controlId="email" [error]="errorFor('email')">
           <input
             pInputText
@@ -39,8 +44,9 @@
           type="submit"
           label="Sign In"
           icon="pi pi-arrow-right"
+          [loading]="loading"
           class="signin-btn flex justify-center"
-          [disabled]="submitted && signinForm.invalid"
+          [disabled]="(submitted && signinForm.invalid) || loading || wasError"
         />
 
         <div class="signin-footer">
