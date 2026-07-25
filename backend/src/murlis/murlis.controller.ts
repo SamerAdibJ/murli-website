@@ -15,6 +15,7 @@ import { UpdateMurliDto } from './dto/update-murli.dto';
 import { ok } from '../common/helpers/response';
 import { AuthGuard } from '../auth/guards/auth.guard';
 import { ApiBearerAuth } from '@nestjs/swagger';
+import { GetUser } from '../auth/decorators/get-user.decorator';
 @ApiBearerAuth()
 @UseGuards(AuthGuard)
 @Controller('murli')
@@ -22,14 +23,20 @@ export class MurlisController {
   constructor(private readonly murlisService: MurlisService) {}
 
   @Get('today')
-  async getTodayMurli() {
-    const murli = await this.murlisService.getTodayMurli();
+  async getTodayMurli(@GetUser() user: { role: string }) {
+    const murli = await this.murlisService.getTodayMurli(user.role === 'admin');
     return ok(murli, 'Today Murli fetched successfully');
   }
 
   @Get(':date')
-  async getMurliByDate(@Param('date') date: string) {
-    const murli = await this.murlisService.getMurliByDate(date);
+  async getMurliByDate(
+    @Param('date') date: string,
+    @GetUser() user: { role: string },
+  ) {
+    const murli = await this.murlisService.getMurliByDate(
+      date,
+      user.role === 'admin',
+    );
     return ok(murli, `Murli for ${date} fetched successfully`);
   }
 

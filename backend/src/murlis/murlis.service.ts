@@ -15,16 +15,21 @@ import {
 export class MurlisService {
   constructor(@Inject(DRIZZLE) private db: NodePgDatabase<typeof schema>) {}
 
-  async getTodayMurli(): Promise<MurliResponse> {
+  async getTodayMurli(admin = false): Promise<MurliResponse> {
     const today = new Date().toISOString().split('T')[0];
-    return this.getMurliByDate(today);
+    return this.getMurliByDate(today, admin);
   }
 
-  async getMurliByDate(date: string): Promise<MurliResponse> {
+  async getMurliByDate(date: string, admin = false): Promise<MurliResponse> {
+    const conditions = [eq(murlis.date, date)];
+    if (!admin) {
+      conditions.push(eq(murlis.published, true));
+    }
+
     const [murli] = await this.db
       .select()
       .from(murlis)
-      .where(eq(murlis.date, date));
+      .where(and(...conditions));
 
     if (!murli) {
       throw new NotFoundException(`No Murli found for ${date}`);

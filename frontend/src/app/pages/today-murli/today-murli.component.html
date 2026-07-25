@@ -1,34 +1,62 @@
-<div class="flex flex-col h-full">
-  <h1 class="my-4 text-2xl shrink-0 text-center">
-    📅 Murli, <span>{{ today | date: 'EEE MMM d y' }}</span>
-  </h1>
+<div class="flex flex-col h-full p-4">
+  @if (loading()) {
+    <div class="flex align-items-center justify-content-center flex-1">
+      <i class="pi pi-spin pi-spinner text-4xl text-primary"></i>
+    </div>
+  } @else if (error()) {
+    <div class="flex align-items-center justify-content-center flex-1">
+      <p class="text-color-secondary">{{ error() }}</p>
+    </div>
+  } @else {
+    <h1 class="my-4 text-2xl shrink-0 text-center text-color">
+      📅 Murli, <span>{{ today | date: 'EEE MMM d y' }}</span>
+    </h1>
 
-  <p-tabs value="full" class="flex-1 flex flex-col min-h-0 border-red-400">
-    <p-tablist class="shrink-0">
-      @for (tab of tabHeaders; track tab.id) {
-        <p-tab [value]="tab.id" class="flex justify-between items-center text-primary-500">
-          <i [class]="tab.icon"></i>
-          {{ tab.title }}
-        </p-tab>
-      }
-    </p-tablist>
-
-    <p-tabpanels class="flex-1 min-h-0 overflow-y-auto p-6!">
-      <p-tabpanel value="full">
-        @for (section of murliSections; track section.title) {
-          <app-murli-section
-            [title]="section.title"
-            [subtitle]="section.subtitle"
-            [content]="section.content"
-          />
+    <p-tabs value="full" class="flex-1 flex flex-column min-h-0">
+      <p-tablist class="shrink-0">
+        @for (tab of tabHeaders; track tab.id) {
+          <p-tab [value]="tab.id" class="flex justify-content-between align-items-center">
+            <i [class]="tab.icon"></i>
+            {{ tab.title }}
+          </p-tab>
         }
-      </p-tabpanel>
-      <p-tabpanel value="summary">
-        <h1>Murli component with summary text</h1>
-      </p-tabpanel>
-      <p-tabpanel value="song">
-        <h1>Youtube video component</h1>
-      </p-tabpanel>
-    </p-tabpanels>
-  </p-tabs>
+      </p-tablist>
+
+      <p-tabpanels class="flex-1 min-h-0 overflow-y-auto">
+        <p-tabpanel value="full">
+          @for (section of murli(); track section.title) {
+            <app-murli-section
+              [title]="section.title"
+              [subtitle]="section.subtitle"
+              [content]="section.content"
+            />
+          }
+          @for (section of avyaktSections(); track section.title) {
+            <app-murli-section
+              [title]="section.title"
+              [subtitle]="section.subtitle"
+              [content]="section.content"
+            />
+          }
+        </p-tabpanel>
+
+        <p-tabpanel value="summary">
+          <p class="text-color-secondary">Summary coming soon.</p>
+        </p-tabpanel>
+
+        <p-tabpanel value="song">
+          @if (morningContent()) {
+            <div class="flex flex-column align-items-center gap-3 p-4">
+              <h3 class="text-lg font-semibold m-0 text-color">{{ morningTitle() }}</h3>
+              <a [href]="morningContent()" target="_blank" class="p-button p-button-rounded">
+                <i class="pi pi-youtube"></i> Watch on YouTube
+              </a>
+            </div>
+          } @else {
+            <p class="text-color-secondary">No song for today's Murli.</p>
+          }
+        </p-tabpanel>
+      </p-tabpanels>
+    </p-tabs>
+  }
 </div>
