@@ -51,6 +51,7 @@ export class AuthService {
           firstName: data.user.firstName,
           lastName: data.user.lastName,
           email: data.user.email,
+          country: data.user.country,
           role: data.user.role,
           status: 'active',
           emailVerified: false,

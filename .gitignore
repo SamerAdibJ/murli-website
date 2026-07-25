@@ -5,3 +5,5 @@ dist/
 .DS_Store
 Thumbs.db
 tasks/*
+# VS Code local settings
+.vscode/settings.json

@@ -129,7 +129,7 @@ export class Signup {
     if (this.signupForm.invalid) return;
 
     this.loading = true;
-    const { country, repeatPassword, ...payload } = this.signupForm.value;
+    const { repeatPassword, ...payload } = this.signupForm.value;
     this.authService.register(payload).subscribe({
       next: () => {
         this.authService.setPendingApproval(true);

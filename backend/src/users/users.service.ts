@@ -39,6 +39,7 @@ export class UsersService {
     firstName: string;
     lastName: string;
     email: string;
+    country: string;
     passwordHash: string;
   }): Promise<User> {
     const [user] = await this.db.insert(users).values(data).returning();
@@ -104,6 +105,7 @@ export class UsersService {
       firstName: row.firstName,
       lastName: row.lastName,
       email: row.email,
+      country: row.country,
       role: row.role,
       status: row.status,
       emailVerified: row.emailVerified,

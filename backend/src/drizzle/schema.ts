@@ -97,6 +97,7 @@ export const users = pgTable('users', {
   firstName: varchar('first_name', { length: 100 }).notNull(),
   lastName: varchar('last_name', { length: 100 }).notNull(),
   email: varchar('email', { length: 255 }).notNull().unique(),
+  country: varchar('country', { length: 100 }).notNull(),
   passwordHash: text('password_hash').notNull(),
   role: roleEnum('role').notNull().default('member'),
   status: statusEnum('status').notNull().default('pending'),

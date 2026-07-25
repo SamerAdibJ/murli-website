@@ -40,6 +40,7 @@ export class AuthService {
       firstName: dto.firstName,
       lastName: dto.lastName,
       email: dto.email,
+      country: dto.country,
       passwordHash,
     });
 
@@ -84,6 +85,7 @@ export class AuthService {
         firstName: user.firstName,
         lastName: user.lastName,
         email: user.email,
+        country: user.country,
         role: user.role,
       },
     };

@@ -10,6 +10,7 @@ export interface User {
 	firstName: string;
 	lastName: string;
 	email: string;
+	country: string;
 	role: Role;
 	status: UserStatus;
 	emailVerified: boolean;
@@ -173,6 +174,7 @@ export interface LoginResponse {
 		firstName: string;
 		lastName: string;
 		email: string;
+		country: string;
 		role: Role;
 	};
 }
