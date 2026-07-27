@@ -40,7 +40,8 @@ export interface MurliResponse {
 	sloganEn: string | null;
 	avyaktSignalAr: string | null;
 	avyaktSignalEn: string | null;
-	songTitle: string | null;
+	songTitleEn: string | null;
+	songTitleAr: string | null;
 	songUrl: string | null; // YouTube URL
 	published: boolean;
 	createdBy: string | null; // User ID
@@ -69,7 +70,8 @@ export interface CreateMurliDto {
 	sloganEn?: string | null;
 	avyaktSignalAr?: string | null;
 	avyaktSignalEn?: string | null;
-	songTitle?: string | null;
+	songTitleEn?: string | null;
+	songTitleAr?: string | null;
 	songUrl?: string | null;
 	published?: boolean;
 	createdBy?: string | null;
@@ -95,7 +97,8 @@ export interface UpdateMurliDto {
 	sloganEn?: string | null;
 	avyaktSignalAr?: string | null;
 	avyaktSignalEn?: string | null;
-	songTitle?: string | null;
+	songTitleEn?: string | null;
+	songTitleAr?: string | null;
 	songUrl?: string | null;
 	published?: boolean;
 	date?: string;

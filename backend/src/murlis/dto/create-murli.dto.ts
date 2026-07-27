@@ -68,7 +68,10 @@ export class CreateMurliDto {
   avyaktSignalEn?: string | null;
 
   @ApiPropertyOptional()
-  songTitle?: string | null;
+  songTitleEn?: string | null;
+
+  @ApiPropertyOptional()
+  songTitleAr?: string | null;
 
   @ApiPropertyOptional()
   songUrl?: string | null;

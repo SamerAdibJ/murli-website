@@ -3,4 +3,37 @@
     display: flex;
     justify-content: space-around;
   }
+  .p-datepicker-panel {
+
+    .p-datepicker-header {
+      background-color: var(--p-primary-500);
+      border-radius: 10px;
+      padding: 4px;
+    }
+    .p-datepicker-today > .p-datepicker-day {
+      background: var(--p-primary-500);
+      color: var(--color-white);
+    }
+    .p-button-text.p-button-secondary {
+      color: black;
+    }
+    .p-button-text.p-button-secondary {
+      color: white;
+    }
+  }
+
+  .p-dark .p-datepicker-panel {
+    .p-button-text.p-button-secondary {
+      color: white;
+    }
+  }
+
+  [dir=rtl] .p-datepicker-panel {
+    .p-button-text.p-button-secondary {
+      svg {
+        transform: rotate(180deg);
+      }
+    }
+  }
+
 }

@@ -1,0 +1,1 @@
+ALTER TABLE "murlis" ALTER COLUMN "published" SET NOT NULL;

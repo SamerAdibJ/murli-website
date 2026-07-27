@@ -15,8 +15,8 @@ import {
 export class MurlisService {
   constructor(@Inject(DRIZZLE) private db: NodePgDatabase<typeof schema>) {}
 
-  async getTodayMurli(admin = false): Promise<MurliResponse> {
-    const today = new Date().toISOString().split('T')[0];
+  async getTodayMurli(admin = false, date?: string): Promise<MurliResponse> {
+    const today = date ?? new Date().toISOString().split('T')[0];
     return this.getMurliByDate(today, admin);
   }
 
@@ -129,7 +129,8 @@ export class MurlisService {
       sloganEn: row.sloganEn ?? null,
       avyaktSignalAr: row.avyaktSignalAr ?? null,
       avyaktSignalEn: row.avyaktSignalEn ?? null,
-      songTitle: row.songTitle ?? null,
+      songTitleEn: row.songTitleEn ?? null,
+      songTitleAr: row.songTitleAr ?? null,
       songUrl: row.songUrl ?? null,
       published: row.published ?? false,
       createdBy: row.createdBy ?? null,

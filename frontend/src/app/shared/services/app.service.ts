@@ -1,5 +1,6 @@
 import { Injectable, signal, computed, effect } from '@angular/core';
-
+import { PrimeNG } from 'primeng/config';
+import { calendarAr, calendarEn } from '../translations/translations';
 export interface NavItem {
   label: string;
   icon: string;
@@ -20,7 +21,7 @@ export class AppService {
 
   readonly isAdmin = computed(() => this._role() === 'admin');
 
-  constructor() {
+  constructor(private primeNG: PrimeNG) {
     effect(() => {
       document.documentElement.classList.toggle('p-dark', this._darkMode());
       localStorage.setItem('darkMode', String(this._darkMode()));
@@ -29,6 +30,11 @@ export class AppService {
     effect(() => {
       document.documentElement.dir = this.dir();
       localStorage.setItem('isRtl', String(this._isRtl()));
+      if (this._isRtl()) {
+        primeNG.setTranslation(calendarAr);
+      } else {
+        primeNG.setTranslation(calendarEn);
+      }
     });
   }
 

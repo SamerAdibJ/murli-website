@@ -1,21 +1,43 @@
-<div class="flex flex-col h-full p-4">
+<div class="flex flex-1 flex-col h-full min-h-0">
+  <h1
+    class="relative my-4 px-4 text-2xl shrink-0 text-center text-color flex align-items-center justify-content-center gap-2 flex-wrap"
+  >
+    📅 Murli,
+    <span
+      class="cursor-pointer text-primary hover:underline"
+      (click)="showDatePicker.set(!showDatePicker())"
+    >
+      {{ selectedDate() | date: 'EEE MMM d y' }}
+    </span>
+
+    @if (showDatePicker()) {
+      <div class="fixed inset-0 z-0" (click)="showDatePicker.set(false)"></div>
+      <div class="fixed top-14 z-10 mx-4 rounded-lg" (click)="$event.stopPropagation()">
+        <p-datepicker
+          (onSelect)="onDateSelected($event)"
+          [inline]="true"
+          [showOtherMonths]="false"
+          class="shadow-4 rounded-2xl"
+        />
+      </div>
+    }
+    @if (appService.isAdmin() && !loading() && !noMurli()) {
+      <p-tag
+        [value]="published() ? 'Published' : 'Unpublished'"
+        [severity]="published() ? 'success' : 'warn'"
+      />
+    }
+  </h1>
+
   @if (loading()) {
     <div class="flex align-items-center justify-content-center flex-1">
       <i class="pi pi-spin pi-spinner text-4xl text-primary"></i>
     </div>
-  } @else if (error()) {
-    <div class="flex align-items-center justify-content-center flex-1">
-      <p class="text-color-secondary">{{ error() }}</p>
-    </div>
   } @else {
-    <h1 class="my-4 text-2xl shrink-0 text-center text-color">
-      📅 Murli, <span>{{ today | date: 'EEE MMM d y' }}</span>
-    </h1>
-
     <p-tabs value="full" class="flex-1 flex flex-column min-h-0">
       <p-tablist class="shrink-0">
         @for (tab of tabHeaders; track tab.id) {
-          <p-tab [value]="tab.id" class="flex justify-content-between align-items-center">
+          <p-tab [value]="tab.id" class="flex justify-between items-center">
             <i [class]="tab.icon"></i>
             {{ tab.title }}
           </p-tab>
@@ -24,28 +46,46 @@
 
       <p-tabpanels class="flex-1 min-h-0 overflow-y-auto">
         <p-tabpanel value="full">
-          @for (section of murli(); track section.title) {
-            <app-murli-section
-              [title]="section.title"
-              [subtitle]="section.subtitle"
-              [content]="section.content"
-            />
-          }
-          @for (section of avyaktSections(); track section.title) {
-            <app-murli-section
-              [title]="section.title"
-              [subtitle]="section.subtitle"
-              [content]="section.content"
-            />
+          @if (noMurli()) {
+            <div class="flex align-items-center justify-content-center py-6">
+              <p class="text-color-secondary text-lg">No Murli available for today.</p>
+            </div>
+          } @else {
+            @for (section of murli(); track section.title) {
+              <app-murli-section
+                [title]="section.title"
+                [subtitle]="section.subtitle"
+                [content]="section.content"
+              />
+            }
+            @for (section of avyaktSections(); track section.title) {
+              <app-murli-section
+                [title]="section.title"
+                [subtitle]="section.subtitle"
+                [content]="section.content"
+              />
+            }
           }
         </p-tabpanel>
 
         <p-tabpanel value="summary">
-          <p class="text-color-secondary">Summary coming soon.</p>
+          @if (noMurli()) {
+            <div class="flex align-items-center justify-content-center py-6">
+              <p class="text-color-secondary text-lg">No Murli available for today.</p>
+            </div>
+          } @else {
+            <div class="flex align-items-center justify-content-center py-6">
+              <p class="text-color-secondary">Summary coming soon.</p>
+            </div>
+          }
         </p-tabpanel>
 
         <p-tabpanel value="song">
-          @if (morningContent()) {
+          @if (noMurli()) {
+            <div class="flex align-items-center justify-content-center py-6">
+              <p class="text-color-secondary text-lg">No Murli available for today.</p>
+            </div>
+          } @else if (morningContent()) {
             <div class="flex flex-column align-items-center gap-3 p-4">
               <h3 class="text-lg font-semibold m-0 text-color">{{ morningTitle() }}</h3>
               <a [href]="morningContent()" target="_blank" class="p-button p-button-rounded">
@@ -53,7 +93,9 @@
               </a>
             </div>
           } @else {
-            <p class="text-color-secondary">No song for today's Murli.</p>
+            <div class="flex align-items-center justify-content-center py-6">
+              <p class="text-color-secondary">No song for today's Murli.</p>
+            </div>
           }
         </p-tabpanel>
       </p-tabpanels>

@@ -16,8 +16,15 @@ export class MurlisService {
   private http = inject(HttpClient);
 
   getToday(): Observable<MurliResponse> {
+    const localDate = new Date().toLocaleDateString('en-CA'); // '2026-07-26' in local timezone
     return this.http
-      .get<ApiResponse<MurliResponse>>(`${API.baseUrl}${API.murlis.today}`)
+      .get<ApiResponse<MurliResponse>>(`${API.baseUrl}${API.murlis.today}?date=${localDate}`)
+      .pipe(map((res) => res.data));
+  }
+
+  getByDate(date: string): Observable<MurliResponse> {
+    return this.http
+      .get<ApiResponse<MurliResponse>>(`${API.baseUrl}${API.murlis.byDate(date)}`)
       .pipe(map((res) => res.data));
   }
 
@@ -28,7 +35,7 @@ export class MurlisService {
       { title: 'Essence', content: c(murli.essenceAr, murli.essenceEn) },
       { title: 'Question', content: c(murli.questionAr, murli.questionEn) },
       { title: 'Answer', content: c(murli.answerAr, murli.answerEn) },
-      { title: 'Song', subtitle: murli.songTitle ?? undefined, content: murli.songUrl },
+      { title: 'Song', content: c(murli.songTitleAr, murli.songTitleEn) },
       { title: 'Murli', content: c(murli.mainContentAr, murli.mainContentEn) },
       {
         title: 'Essence for Dharna',
@@ -40,7 +47,7 @@ export class MurlisService {
 
     const avyakt: MurliSectionData[] = [
       { title: '', content: c(murli.essenceForDharnaAr, murli.essenceForDharnaEn) },
-      { title: 'Song', subtitle: murli.songTitle ?? undefined, content: murli.songUrl },
+      // { title: 'Song', subtitle: murli.songTitleEn ?? undefined, content: murli.songUrl },
       { title: 'Murli', content: c(murli.mainContentAr, murli.mainContentEn) },
       { title: 'Blessing', content: c(murli.blessingAr, murli.blessingEn) },
       { title: 'Slogan', content: c(murli.sloganAr, murli.sloganEn) },

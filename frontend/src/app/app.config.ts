@@ -8,6 +8,7 @@ import { providePrimeNG } from 'primeng/config';
 import Aura from '@primeuix/themes/aura';
 import { BkTheme } from './shared/theme/bk-theme';
 import { ConfirmationService, MessageService } from 'primeng/api';
+
 export const appConfig: ApplicationConfig = {
   providers: [
     provideBrowserGlobalErrorListeners(),
@@ -23,6 +24,47 @@ export const appConfig: ApplicationConfig = {
           darkModeSelector: '.p-dark',
           cssLayer: false,
         },
+      },
+
+      translation: {
+        accept: 'نعم',
+        reject: 'لا',
+
+        // DatePicker
+        dayNames: ['الأحد', 'الإثنين', 'الثلاثاء', 'الأربعاء', 'الخميس', 'الجمعة', 'السبت'],
+        dayNamesShort: ['الأحد', 'الإثنين', 'الثلاثاء', 'الأربعاء', 'الخميس', 'الجمعة', 'السبت'],
+        dayNamesMin: ['الأحد', 'الإثنين', 'الثلاثاء', 'الأربعاء', 'الخميس', 'الجمعة', 'السبت'],
+        monthNames: [
+          'كانون ثاني',
+          'شباط',
+          'اذار',
+          'نيسان',
+          'أيار',
+          'حزيران',
+          'تموز',
+          'اب',
+          'أيلول',
+          'تشرين أول',
+          'تشرين ثاني',
+          'كانون أول',
+        ],
+        monthNamesShort: [
+          'يناير',
+          'فبراير',
+          'مارس',
+          'أبريل',
+          'مايو',
+          'يونيو',
+          'يوليو',
+          'أغسطس',
+          'سبتمبر',
+          'أكتوبر',
+          'نوفمبر',
+          'ديسمبر',
+        ],
+
+        today: 'اليوم',
+        clear: 'مسح',
       },
     }),
   ],

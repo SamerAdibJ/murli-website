@@ -1,4 +1,7 @@
 export const environment = {
   production: false,
-  apiUrl: 'http://localhost:3000',
+  apiUrl:
+    typeof window !== 'undefined'
+      ? `http://${window.location.hostname}:3000`
+      : 'http://localhost:3000',
 };

@@ -7,6 +7,7 @@ import {
   ParseIntPipe,
   Patch,
   Post,
+  Query,
   UseGuards,
 } from '@nestjs/common';
 import { MurlisService } from './murlis.service';
@@ -23,8 +24,14 @@ export class MurlisController {
   constructor(private readonly murlisService: MurlisService) {}
 
   @Get('today')
-  async getTodayMurli(@GetUser() user: { role: string }) {
-    const murli = await this.murlisService.getTodayMurli(user.role === 'admin');
+  async getTodayMurli(
+    @GetUser() user: { role: string },
+    @Query('date') date?: string,
+  ) {
+    const murli = await this.murlisService.getTodayMurli(
+      user.role === 'admin',
+      date,
+    );
     return ok(murli, 'Today Murli fetched successfully');
   }
 
