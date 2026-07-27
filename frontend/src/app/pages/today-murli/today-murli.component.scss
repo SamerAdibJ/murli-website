@@ -1,8 +1,22 @@
 ::ng-deep {
+
+  //tabs
   .p-tablist-tab-list {
     display: flex;
     justify-content: space-around;
+    // border-color: var(--p-primary-500);
+    .p-tab-active {
+      background: var(--p-primary-500);
+      border-top-left-radius: 8px;
+      border-top-right-radius: 8px;
+      color: white;
+    }
+    .p-tablist-active-bar {
+      display: none;
+    }
   }
+
+  //datepicker
   .p-datepicker-panel {
 
     .p-datepicker-header {
