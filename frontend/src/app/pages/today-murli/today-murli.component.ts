@@ -7,6 +7,11 @@ import { MurliSection } from '../../shared/components/murli-section/murli-sectio
 import { AppService } from '../../shared/services/app.service';
 import { MurlisService } from '../../shared/services/murlis.service';
 import { DatePickerModule } from 'primeng/datepicker';
+import { ButtonModule } from 'primeng/button';
+import { ProgressSpinnerModule } from 'primeng/progressspinner';
+import { SelectButtonModule } from 'primeng/selectbutton';
+import { FormsModule } from '@angular/forms';
+
 export interface TabItem {
   id: string;
   title: string;
@@ -15,7 +20,18 @@ export interface TabItem {
 
 @Component({
   selector: 'app-today-murli',
-  imports: [TabsModule, TagModule, DatePipe, MurliSection, DatePickerModule, CommonModule],
+  imports: [
+    TabsModule,
+    TagModule,
+    DatePipe,
+    MurliSection,
+    DatePickerModule,
+    CommonModule,
+    ButtonModule,
+    ProgressSpinnerModule,
+    SelectButtonModule,
+    FormsModule,
+  ],
   templateUrl: './today-murli.component.html',
   styleUrl: './today-murli.component.scss',
 })
@@ -27,8 +43,14 @@ export class TodayMurliComponent {
   showDatePicker = signal(false);
   loading = signal(true);
   noMurli = signal(false);
+  isEditing = signal(false);
+  isEmpty = signal(false);
+  murliTypeOptions = [
+    { label: 'Morning', value: 'morning' },
+    { label: 'Avyakt', value: 'avyakt' },
+  ];
 
-  private rawMurli = signal<MurliResponse | null>(null);
+  protected rawMurli = signal<MurliResponse | null>(null);
 
   readonly published = computed(() => this.rawMurli()?.published ?? false);
 
@@ -69,11 +91,17 @@ export class TodayMurliComponent {
     this.murlisService.getByDate(dateStr).subscribe({
       next: (data) => {
         this.rawMurli.set(data);
+        this.isEmpty.set(false);
         this.loading.set(false);
       },
       error: () => {
         this.loading.set(false);
-        this.noMurli.set(true);
+        if (this.appService.isAdmin()) {
+          this.rawMurli.set(this.emptyMurli(dateStr));
+          this.isEmpty.set(true);
+        } else {
+          this.noMurli.set(true);
+        }
       },
     });
   }
@@ -82,5 +110,49 @@ export class TodayMurliComponent {
     this.showDatePicker.set(false);
     console.log(date);
     this.fetchMurli(date);
+  }
+
+  toggleEdit() {
+    this.isEditing.update((v) => !v);
+  }
+
+  onTypeChange(type: 'morning' | 'avyakt'): void {
+    const current = this.rawMurli();
+    if (current) {
+      this.rawMurli.set({ ...current, type });
+    }
+  }
+
+  private emptyMurli(date: string): MurliResponse {
+    return {
+      id: 0,
+      date,
+      type: 'morning',
+      titleEn: '',
+      titleAr: '',
+      essenceEn: '',
+      essenceAr: '',
+      questionEn: '',
+      questionAr: '',
+      answerEn: '',
+      answerAr: '',
+      mainContentEn: '',
+      mainContentAr: '',
+      essenceForDharnaEn: '',
+      essenceForDharnaAr: '',
+      blessingEn: '',
+      blessingAr: '',
+      sloganEn: '',
+      sloganAr: '',
+      avyaktSignalEn: '',
+      avyaktSignalAr: '',
+      songTitleEn: '',
+      songTitleAr: '',
+      songUrl: '',
+      published: false,
+      createdBy: null,
+      createdAt: '',
+      updatedAt: '',
+    };
   }
 }

@@ -43,11 +43,12 @@ export class MurlisService {
       },
       { title: 'Blessing', content: c(murli.blessingAr, murli.blessingEn) },
       { title: 'Slogan', content: c(murli.sloganAr, murli.sloganEn) },
+      { title: 'Avyakt Signal', content: c(murli.avyaktSignalAr, murli.avyaktSignalEn) },
     ];
 
     const avyakt: MurliSectionData[] = [
       { title: '', content: c(murli.essenceForDharnaAr, murli.essenceForDharnaEn) },
-      // { title: 'Song', subtitle: murli.songTitleEn ?? undefined, content: murli.songUrl },
+      { title: 'Song', content: c(murli.songTitleAr, murli.songTitleEn) },
       { title: 'Murli', content: c(murli.mainContentAr, murli.mainContentEn) },
       { title: 'Blessing', content: c(murli.blessingAr, murli.blessingEn) },
       { title: 'Slogan', content: c(murli.sloganAr, murli.sloganEn) },

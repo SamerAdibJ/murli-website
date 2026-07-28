@@ -1,4 +1,8 @@
-<div class="flex flex-1 flex-col h-full min-h-0">
+<div
+  class="flex flex-1 flex-col h-full min-h-0"
+  [class.editing-active]="isEditing()"
+  [class.editing-avyakt]="rawMurli()?.type === 'avyakt'"
+>
   <h1
     class="relative my-4 px-4 text-2xl shrink-0 text-center text-color flex align-items-center justify-content-center gap-2 flex-wrap"
   >
@@ -21,84 +25,125 @@
         />
       </div>
     }
-    @if (appService.isAdmin() && !loading() && !noMurli()) {
-      <p-tag
-        [value]="published() ? 'Published' : 'Unpublished'"
-        [severity]="published() ? 'success' : 'warn'"
-      />
+    @if (appService.isAdmin() && !loading()) {
+      @if (!isEmpty()) {
+        <p-tag
+          [value]="published() ? 'Published' : 'Unpublished'"
+          [severity]="published() ? 'success' : 'warn'"
+        />
+      }
+      <button
+        pButton
+        [severity]="isEmpty() || isEditing() ? 'success' : 'warn'"
+        icon="pi pi-pencil"
+        variant="outlined"
+        [ngClass]="isEmpty() ? 'bg-green-500! outline-green-500' : ''"
+        (click)="toggleEdit()"
+      >
+        {{ isEditing() ? 'Save and Exit' : isEmpty() ? 'Create' : 'Edit' }}
+      </button>
     }
   </h1>
 
-  @if (loading()) {
-    <div class="flex align-items-center justify-content-center flex-1">
-      <i class="pi pi-spin pi-spinner text-4xl text-primary"></i>
-    </div>
-  } @else {
-    <p-tabs value="full" class="flex-1 flex flex-column min-h-0">
-      <p-tablist class="shrink-0">
-        @for (tab of tabHeaders; track tab.id) {
-          <p-tab [value]="tab.id" class="flex justify-between items-center">
-            <i [class]="tab.icon"></i>
-            {{ tab.title }}
-          </p-tab>
+  <p-tabs value="full" class="flex-1 flex flex-column min-h-0 mt-4">
+    <p-tablist class="shrink-0">
+      @for (tab of tabHeaders; track tab.id) {
+        <p-tab [value]="tab.id" class="flex justify-between items-center">
+          <i [class]="tab.icon"></i>
+          {{ tab.title }}
+        </p-tab>
+      }
+    </p-tablist>
+    <p-tabpanels class="flex-1 min-h-0 overflow-y-auto relative">
+      @if (loading()) {
+        <div class="flex justify-center absolute top-0 bottom-0 left-0 right-0 h-full items-center">
+          <p-progress-spinner class="h-full" ariaLabel="loading" />
+        </div>
+      }
+      <p-tabpanel value="full">
+        @if (noMurli() || (isEmpty() && !isEditing())) {
+          <div class="flex align-items-center justify-center py-6">
+            <p class="text-color-secondary text-lg">No Murli available for today.</p>
+          </div>
+        } @else {
+          <div class="px-5 pt-4 pb-2 flex justify-start items-center gap-4 flex-col">
+            <p class="text-xl font-bold tracking-wider text-color-secondary">
+              {{ rawMurli()?.type === 'avyakt' ? 'Avyakt Murli' : 'Morning Murli' }},
+              {{ selectedDate() | date: 'EEE MMM d y' }}
+            </p>
+            @if (isEditing()) {
+              <p-selectbutton
+                [options]="murliTypeOptions"
+                optionLabel="label"
+                optionValue="value"
+                [ngModel]="rawMurli()?.type"
+                (ngModelChange)="onTypeChange($event)"
+              />
+            }
+          </div>
+          @for (section of murli(); track section.title) {
+            <app-murli-section
+              [editing]="isEditing()"
+              [title]="section.title"
+              [subtitle]="section.subtitle"
+              [content]="section.content"
+            />
+          }
+          @for (section of avyaktSections(); track section.title) {
+            <app-murli-section
+              [editing]="isEditing()"
+              [title]="section.title"
+              [subtitle]="section.subtitle"
+              [content]="section.content"
+            />
+          }
         }
-      </p-tablist>
+      </p-tabpanel>
 
-      <p-tabpanels class="flex-1 min-h-0 overflow-y-auto">
-        <p-tabpanel value="full">
-          @if (noMurli()) {
-            <div class="flex align-items-center justify-content-center py-6">
-              <p class="text-color-secondary text-lg">No Murli available for today.</p>
+      <p-tabpanel value="summary">
+        @if (noMurli()) {
+          <div class="flex align-items-center justify-center py-6">
+            <p class="text-color-secondary text-lg">No Murli available for today.</p>
+          </div>
+        } @else {
+          <div class="flex align-items-center justify-center py-6">
+            <div class="px-5 pt-4 pb-2 flex justify-start items-center gap-4 flex-col">
+              <p class="text-xl font-bold tracking-wider text-color-secondary">
+                {{ rawMurli()?.type === 'avyakt' ? 'Avyakt Murli' : 'Morning Murli' }},
+                {{ selectedDate() | date: 'EEE MMM d y' }}
+              </p>
+              @if (isEditing()) {
+                <!-- <p-selectbutton
+                  [options]="murliTypeOptions"
+                  optionLabel="label"
+                  optionValue="value"
+                  [ngModel]="rawMurli()?.type"
+                  (ngModelChange)="onTypeChange($event)"
+                /> -->
+              }
             </div>
-          } @else {
-            @for (section of murli(); track section.title) {
-              <app-murli-section
-                [title]="section.title"
-                [subtitle]="section.subtitle"
-                [content]="section.content"
-              />
-            }
-            @for (section of avyaktSections(); track section.title) {
-              <app-murli-section
-                [title]="section.title"
-                [subtitle]="section.subtitle"
-                [content]="section.content"
-              />
-            }
-          }
-        </p-tabpanel>
+          </div>
+        }
+      </p-tabpanel>
 
-        <p-tabpanel value="summary">
-          @if (noMurli()) {
-            <div class="flex align-items-center justify-content-center py-6">
-              <p class="text-color-secondary text-lg">No Murli available for today.</p>
-            </div>
-          } @else {
-            <div class="flex align-items-center justify-content-center py-6">
-              <p class="text-color-secondary">Summary coming soon.</p>
-            </div>
-          }
-        </p-tabpanel>
-
-        <p-tabpanel value="song">
-          @if (noMurli()) {
-            <div class="flex align-items-center justify-content-center py-6">
-              <p class="text-color-secondary text-lg">No Murli available for today.</p>
-            </div>
-          } @else if (morningContent()) {
-            <div class="flex flex-column align-items-center gap-3 p-4">
-              <h3 class="text-lg font-semibold m-0 text-color">{{ morningTitle() }}</h3>
-              <a [href]="morningContent()" target="_blank" class="p-button p-button-rounded">
-                <i class="pi pi-youtube"></i> Watch on YouTube
-              </a>
-            </div>
-          } @else {
-            <div class="flex align-items-center justify-content-center py-6">
-              <p class="text-color-secondary">No song for today's Murli.</p>
-            </div>
-          }
-        </p-tabpanel>
-      </p-tabpanels>
-    </p-tabs>
-  }
+      <p-tabpanel value="song">
+        @if (noMurli()) {
+          <div class="flex align-items-center justify-content-center py-6">
+            <p class="text-color-secondary text-lg">No Murli available for today.</p>
+          </div>
+        } @else if (morningContent()) {
+          <div class="flex flex-column align-items-center gap-3 p-4">
+            <h3 class="text-lg font-semibold m-0 text-color">{{ morningTitle() }}</h3>
+            <a [href]="morningContent()" target="_blank" class="p-button p-button-rounded">
+              <i class="pi pi-youtube"></i> Watch on YouTube
+            </a>
+          </div>
+        } @else {
+          <div class="flex align-items-center justify-content-center py-6">
+            <p class="text-color-secondary">No song for today's Murli.</p>
+          </div>
+        }
+      </p-tabpanel>
+    </p-tabpanels>
+  </p-tabs>
 </div>

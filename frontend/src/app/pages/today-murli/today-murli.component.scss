@@ -1,10 +1,31 @@
+.editing-active {
+  border: 1px solid var(--p-primary-400);
+  border-radius: 2px;
+  transition: all;
+  animation: editPulse 3s ease-in-out infinite;
+  background-color: var(--p-primary-950);
+  box-shadow: inset 0 0px 0 0 var(--p-primary-400);
+  &.editing-avyakt {
+      background-color: var(--color-primary-800);
+  box-shadow: inset 0 0px 0 0 var(--color-primary-800);
+  }
+}
+
+
+
+@keyframes editPulse {
+  0%, 100% { border-color: var(--p-primary-400); }
+  50% { border-color: var(--p-accent-300); }
+}
+
 ::ng-deep {
 
   //tabs
   .p-tablist-tab-list {
     display: flex;
     justify-content: space-around;
-    // border-color: var(--p-primary-500);
+    height: 40px;
+    border-color: var(--p-primary-950);
     .p-tab-active {
       background: var(--p-primary-500);
       border-top-left-radius: 8px;
@@ -47,6 +68,16 @@
       svg {
         transform: rotate(180deg);
       }
+    }
+  }
+
+  .p-selectbutton .p-togglebutton {
+    &.p-togglebutton-checked:first-child, &.p-togglebutton-checked:first-child .p-togglebutton-content{
+      background-color: var(--p-primary-500);
+    }
+
+    &.p-togglebutton-checked:last-child, &.p-togglebutton-checked:last-child .p-togglebutton-content{
+      background-color: var( --color-primary-800)
     }
   }
 
