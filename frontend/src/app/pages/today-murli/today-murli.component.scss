@@ -71,7 +71,7 @@
     }
   }
 
-  .p-selectbutton .p-togglebutton {
+  .p-tabpanel .p-selectbutton .p-togglebutton {
     &.p-togglebutton-checked:first-child, &.p-togglebutton-checked:first-child .p-togglebutton-content{
       background-color: var(--p-primary-500);
     }

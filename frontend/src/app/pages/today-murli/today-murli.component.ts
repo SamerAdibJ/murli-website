@@ -51,19 +51,19 @@ export class TodayMurliComponent {
   ];
 
   protected rawMurli = signal<MurliResponse | null>(null);
-
+  showAr = signal(this.appService.isRtl());
   readonly published = computed(() => this.rawMurli()?.published ?? false);
 
   readonly murli = computed(() => {
     const data = this.rawMurli();
     if (!data || data.type === 'avyakt') return [];
-    return this.murlisService.buildSections(data, this.appService.isRtl());
+    return this.murlisService.buildSections(data, this.showAr());
   });
 
   readonly avyaktSections = computed(() => {
     const data = this.rawMurli();
     if (!data || data.type !== 'avyakt') return [];
-    return this.murlisService.buildSections(data, this.appService.isRtl());
+    return this.murlisService.buildSections(data, this.showAr());
   });
 
   readonly morningTitle = computed(() => this.rawMurli()?.songTitleEn ?? '');

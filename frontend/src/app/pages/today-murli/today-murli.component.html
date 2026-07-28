@@ -60,7 +60,18 @@
           <p-progress-spinner class="h-full" ariaLabel="loading" />
         </div>
       }
-      <p-tabpanel value="full">
+      <p-selectbutton
+        [options]="[
+          { label: 'English', value: false },
+          { label: 'العربية', value: true },
+        ]"
+        optionLabel="label"
+        optionValue="value"
+        [ngModel]="showAr()"
+        (ngModelChange)="showAr.set($event)"
+        class="p-button-sm"
+      />
+      <p-tabpanel value="full" [dir]="showAr() ? 'rtl' : 'ltr'">
         @if (noMurli() || (isEmpty() && !isEditing())) {
           <div class="flex align-items-center justify-center py-6">
             <p class="text-color-secondary text-lg">No Murli available for today.</p>
@@ -71,6 +82,7 @@
               {{ rawMurli()?.type === 'avyakt' ? 'Avyakt Murli' : 'Morning Murli' }},
               {{ selectedDate() | date: 'EEE MMM d y' }}
             </p>
+
             @if (isEditing()) {
               <p-selectbutton
                 [options]="murliTypeOptions"
