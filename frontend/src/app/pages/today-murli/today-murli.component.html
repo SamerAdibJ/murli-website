@@ -3,47 +3,62 @@
   [class.editing-active]="isEditing()"
   [class.editing-avyakt]="rawMurli()?.type === 'avyakt'"
 >
-  <h1
-    class="relative my-4 px-4 text-2xl shrink-0 text-center text-color flex align-items-center justify-content-center gap-2 flex-wrap"
+  <div
+    class="relative my-4 px-4 text-xl shrink-0 text-center text-color flex align-items-center justify-content-center gap-2 flex-wrap"
   >
-    📅 Murli,
-    <span
-      class="cursor-pointer text-primary hover:underline"
-      (click)="showDatePicker.set(!showDatePicker())"
-    >
-      {{ selectedDate() | date: 'EEE MMM d y' }}
-    </span>
-
-    @if (showDatePicker()) {
-      <div class="fixed inset-0 z-0" (click)="showDatePicker.set(false)"></div>
-      <div class="fixed top-14 z-10 mx-4 rounded-lg" (click)="$event.stopPropagation()">
-        <p-datepicker
-          (onSelect)="onDateSelected($event)"
-          [inline]="true"
-          [showOtherMonths]="false"
-          class="shadow-4 rounded-2xl"
-        />
-      </div>
-    }
-    @if (appService.isAdmin() && !loading()) {
-      @if (!isEmpty()) {
-        <p-tag
-          [value]="published() ? 'Published' : 'Unpublished'"
-          [severity]="published() ? 'success' : 'warn'"
-        />
-      }
-      <button
-        pButton
-        [severity]="isEmpty() || isEditing() ? 'success' : 'warn'"
-        icon="pi pi-pencil"
-        variant="outlined"
-        [ngClass]="isEmpty() ? 'bg-green-500! outline-green-500' : ''"
-        (click)="toggleEdit()"
+    <div class="flex justify-between w-full">
+      <div
+        class="cursor-pointer text-primary hover:underline"
+        (click)="showDatePicker.set(!showDatePicker())"
       >
-        {{ isEditing() ? 'Save and Exit' : isEmpty() ? 'Create' : 'Edit' }}
-      </button>
-    }
-  </h1>
+        📅 Murli,
+        {{ selectedDate() | date: 'EEE MMM d y' }}
+      </div>
+      <div>
+        @if (!isEmpty()) {
+          <p-tag
+            [value]="published() ? 'Published' : 'Unpublished'"
+            [severity]="published() ? 'success' : 'warn'"
+          />
+        }
+      </div>
+    </div>
+    <div class="flex justify-between w-full">
+      <p-selectbutton
+        [options]="[
+          { label: 'English', value: false },
+          { label: 'العربية', value: true },
+        ]"
+        optionLabel="label"
+        optionValue="value"
+        [ngModel]="showAr()"
+        (ngModelChange)="showAr.set($event)"
+        class="p-button-sm p-0!"
+        size="small"
+      />
+      @if (showDatePicker()) {
+        <div class="fixed inset-0 z-0" (click)="showDatePicker.set(false)"></div>
+        <div class="fixed top-14 z-10 mx-4 rounded-lg" (click)="$event.stopPropagation()">
+          <p-datepicker
+            (onSelect)="onDateSelected($event)"
+            [inline]="true"
+            [showOtherMonths]="false"
+            class="shadow-4 rounded-2xl"
+          />
+        </div>
+      }
+      @if (appService.isAdmin() && !loading()) {
+        <p-button
+          pbottom
+          raised
+          [severity]="isEmpty() || isEditing() ? 'success' : 'warn'"
+          (click)="toggleEdit()"
+        >
+          {{ isEditing() ? 'Save and Exit' : isEmpty() ? 'Create' : 'Edit' }}
+        </p-button>
+      }
+    </div>
+  </div>
 
   <p-tabs value="full" class="flex-1 flex flex-column min-h-0 mt-4">
     <p-tablist class="shrink-0">
@@ -54,30 +69,19 @@
         </p-tab>
       }
     </p-tablist>
-    <p-tabpanels class="flex-1 min-h-0 overflow-y-auto relative">
+    <p-tabpanels class="flex-1 min-h-0 overflow-y-auto relative p-2!">
       @if (loading()) {
         <div class="flex justify-center absolute top-0 bottom-0 left-0 right-0 h-full items-center">
           <p-progress-spinner class="h-full" ariaLabel="loading" />
         </div>
       }
-      <p-selectbutton
-        [options]="[
-          { label: 'English', value: false },
-          { label: 'العربية', value: true },
-        ]"
-        optionLabel="label"
-        optionValue="value"
-        [ngModel]="showAr()"
-        (ngModelChange)="showAr.set($event)"
-        class="p-button-sm"
-      />
       <p-tabpanel value="full" [dir]="showAr() ? 'rtl' : 'ltr'">
         @if (noMurli() || (isEmpty() && !isEditing())) {
           <div class="flex align-items-center justify-center py-6">
             <p class="text-color-secondary text-lg">No Murli available for today.</p>
           </div>
         } @else {
-          <div class="px-5 pt-4 pb-2 flex justify-start items-center gap-4 flex-col">
+          <div class="px-2 pt-2 pb-2 flex justify-start items-center gap-4 flex-col">
             <p class="text-xl font-bold tracking-wider text-color-secondary">
               {{ rawMurli()?.type === 'avyakt' ? 'Avyakt Murli' : 'Morning Murli' }},
               {{ selectedDate() | date: 'EEE MMM d y' }}
@@ -99,6 +103,8 @@
               [title]="section.title"
               [subtitle]="section.subtitle"
               [content]="section.content"
+              [fieldKey]="section.fieldKey!"
+              (contentChange)="onContentChange($event)"
             />
           }
           @for (section of avyaktSections(); track section.title) {
@@ -107,6 +113,8 @@
               [title]="section.title"
               [subtitle]="section.subtitle"
               [content]="section.content"
+              [fieldKey]="section.fieldKey!"
+              (contentChange)="onContentChange($event)"
             />
           }
         }

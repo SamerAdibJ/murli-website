@@ -2,6 +2,7 @@ import { Component, inject, signal, computed } from '@angular/core';
 import { TabsModule } from 'primeng/tabs';
 import { TagModule } from 'primeng/tag';
 import { CommonModule, DatePipe } from '@angular/common';
+import { MessageService } from 'primeng/api';
 import { MurliResponse } from 'shared';
 import { MurliSection } from '../../shared/components/murli-section/murli-section';
 import { AppService } from '../../shared/services/app.service';
@@ -11,6 +12,7 @@ import { ButtonModule } from 'primeng/button';
 import { ProgressSpinnerModule } from 'primeng/progressspinner';
 import { SelectButtonModule } from 'primeng/selectbutton';
 import { FormsModule } from '@angular/forms';
+import { SplitButtonModule } from 'primeng/splitbutton';
 
 export interface TabItem {
   id: string;
@@ -31,12 +33,14 @@ export interface TabItem {
     ProgressSpinnerModule,
     SelectButtonModule,
     FormsModule,
+    SplitButtonModule,
   ],
   templateUrl: './today-murli.component.html',
   styleUrl: './today-murli.component.scss',
 })
 export class TodayMurliComponent {
   private murlisService = inject(MurlisService);
+  private messageService = inject(MessageService);
   readonly appService = inject(AppService);
 
   selectedDate = signal(new Date());
@@ -113,7 +117,73 @@ export class TodayMurliComponent {
   }
 
   toggleEdit() {
-    this.isEditing.update((v) => !v);
+    if (this.isEditing()) {
+      this.saveMurli();
+    } else {
+      this.isEditing.set(true);
+    }
+  }
+
+  onContentChange(event: { fieldKey: string; value: string }): void {
+    const current = this.rawMurli();
+    if (!current) return;
+    this.rawMurli.set({ ...current, [event.fieldKey]: event.value });
+  }
+
+  private saveMurli(): void {
+    const data = this.rawMurli();
+    if (!data) return;
+
+    const payload: Record<string, unknown> = {
+      date: data.date,
+      type: data.type,
+      titleEn: data.titleEn,
+      titleAr: data.titleAr,
+      essenceEn: data.essenceEn,
+      essenceAr: data.essenceAr,
+      questionEn: data.questionEn,
+      questionAr: data.questionAr,
+      answerEn: data.answerEn,
+      answerAr: data.answerAr,
+      mainContentEn: data.mainContentEn,
+      mainContentAr: data.mainContentAr,
+      essenceForDharnaEn: data.essenceForDharnaEn,
+      essenceForDharnaAr: data.essenceForDharnaAr,
+      blessingEn: data.blessingEn,
+      blessingAr: data.blessingAr,
+      sloganEn: data.sloganEn,
+      sloganAr: data.sloganAr,
+      avyaktSignalEn: data.avyaktSignalEn,
+      avyaktSignalAr: data.avyaktSignalAr,
+      songTitleEn: data.songTitleEn,
+      songTitleAr: data.songTitleAr,
+      songUrl: data.songUrl,
+      published: data.published,
+    };
+
+    const save$ = data.id
+      ? this.murlisService.update(data.id, payload)
+      : this.murlisService.create(payload);
+
+    save$.subscribe({
+      next: (saved) => {
+        this.rawMurli.set(saved);
+        this.isEditing.set(false);
+        this.isEmpty.set(false);
+        this.messageService.add({
+          severity: 'success',
+          summary: 'Saved',
+          detail: 'Murli saved successfully.',
+        });
+      },
+      error: () => {
+        this.messageService.add({
+          severity: 'error',
+          summary: 'Error',
+          detail: 'Failed to save Murli.',
+        });
+      },
+    });
   }
 
   onTypeChange(type: 'morning' | 'avyakt'): void {

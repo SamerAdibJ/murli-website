@@ -9,6 +9,7 @@ export interface MurliSectionData {
   title: string;
   subtitle?: string;
   content: string | null;
+  fieldKey: string;
 }
 
 @Injectable({ providedIn: 'root' })
@@ -29,32 +30,101 @@ export class MurlisService {
   }
 
   buildSections(murli: MurliResponse, isRtl: boolean): MurliSectionData[] {
-    const c = (ar: string | null, en: string | null) => (isRtl ? ar : en);
+    const ek = (ar: string, en: string) => (isRtl ? ar : en);
 
     const morning: MurliSectionData[] = [
-      { title: 'Essence', content: c(murli.essenceAr, murli.essenceEn) },
-      { title: 'Question', content: c(murli.questionAr, murli.questionEn) },
-      { title: 'Answer', content: c(murli.answerAr, murli.answerEn) },
-      { title: 'Song', content: c(murli.songTitleAr, murli.songTitleEn) },
-      { title: 'Murli', content: c(murli.mainContentAr, murli.mainContentEn) },
+      {
+        title: 'Essence',
+        fieldKey: ek('essenceAr', 'essenceEn'),
+        content: isRtl ? murli.essenceAr : murli.essenceEn,
+      },
+      {
+        title: 'Question',
+        fieldKey: ek('questionAr', 'questionEn'),
+        content: isRtl ? murli.questionAr : murli.questionEn,
+      },
+      {
+        title: 'Answer',
+        fieldKey: ek('answerAr', 'answerEn'),
+        content: isRtl ? murli.answerAr : murli.answerEn,
+      },
+      {
+        title: 'Song',
+        fieldKey: ek('songTitleAr', 'songTitleEn'),
+        content: isRtl ? murli.songTitleAr : murli.songTitleEn,
+      },
+      {
+        title: 'Murli',
+        fieldKey: ek('mainContentAr', 'mainContentEn'),
+        content: isRtl ? murli.mainContentAr : murli.mainContentEn,
+      },
       {
         title: 'Essence for Dharna',
-        content: c(murli.essenceForDharnaAr, murli.essenceForDharnaEn),
+        fieldKey: ek('essenceForDharnaAr', 'essenceForDharnaEn'),
+        content: isRtl ? murli.essenceForDharnaAr : murli.essenceForDharnaEn,
       },
-      { title: 'Blessing', content: c(murli.blessingAr, murli.blessingEn) },
-      { title: 'Slogan', content: c(murli.sloganAr, murli.sloganEn) },
-      { title: 'Avyakt Signal', content: c(murli.avyaktSignalAr, murli.avyaktSignalEn) },
+      {
+        title: 'Blessing',
+        fieldKey: ek('blessingAr', 'blessingEn'),
+        content: isRtl ? murli.blessingAr : murli.blessingEn,
+      },
+      {
+        title: 'Slogan',
+        fieldKey: ek('sloganAr', 'sloganEn'),
+        content: isRtl ? murli.sloganAr : murli.sloganEn,
+      },
+      {
+        title: 'Avyakt Signal',
+        fieldKey: ek('avyaktSignalAr', 'avyaktSignalEn'),
+        content: isRtl ? murli.avyaktSignalAr : murli.avyaktSignalEn,
+      },
     ];
 
     const avyakt: MurliSectionData[] = [
-      { title: '', content: c(murli.essenceForDharnaAr, murli.essenceForDharnaEn) },
-      { title: 'Song', content: c(murli.songTitleAr, murli.songTitleEn) },
-      { title: 'Murli', content: c(murli.mainContentAr, murli.mainContentEn) },
-      { title: 'Blessing', content: c(murli.blessingAr, murli.blessingEn) },
-      { title: 'Slogan', content: c(murli.sloganAr, murli.sloganEn) },
-      { title: 'Avyakt Signal', content: c(murli.avyaktSignalAr, murli.avyaktSignalEn) },
+      {
+        title: '',
+        fieldKey: ek('essenceForDharnaAr', 'essenceForDharnaEn'),
+        content: isRtl ? murli.essenceForDharnaAr : murli.essenceForDharnaEn,
+      },
+      {
+        title: 'Song',
+        fieldKey: ek('songTitleAr', 'songTitleEn'),
+        content: isRtl ? murli.songTitleAr : murli.songTitleEn,
+      },
+      {
+        title: 'Murli',
+        fieldKey: ek('mainContentAr', 'mainContentEn'),
+        content: isRtl ? murli.mainContentAr : murli.mainContentEn,
+      },
+      {
+        title: 'Blessing',
+        fieldKey: ek('blessingAr', 'blessingEn'),
+        content: isRtl ? murli.blessingAr : murli.blessingEn,
+      },
+      {
+        title: 'Slogan',
+        fieldKey: ek('sloganAr', 'sloganEn'),
+        content: isRtl ? murli.sloganAr : murli.sloganEn,
+      },
+      {
+        title: 'Avyakt Signal',
+        fieldKey: ek('avyaktSignalAr', 'avyaktSignalEn'),
+        content: isRtl ? murli.avyaktSignalAr : murli.avyaktSignalEn,
+      },
     ];
 
     return murli.type === 'avyakt' ? avyakt : morning;
+  }
+
+  create(data: Partial<MurliResponse>): Observable<MurliResponse> {
+    return this.http
+      .post<ApiResponse<MurliResponse>>(`${API.baseUrl}${API.murlis.create}`, data)
+      .pipe(map((res) => res.data));
+  }
+
+  update(id: number, data: Partial<MurliResponse>): Observable<MurliResponse> {
+    return this.http
+      .patch<ApiResponse<MurliResponse>>(`${API.baseUrl}${API.murlis.update(id)}`, data)
+      .pipe(map((res) => res.data));
   }
 }

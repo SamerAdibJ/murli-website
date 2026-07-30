@@ -12,5 +12,6 @@ export class MurliSection {
   @Input() subtitle?: string;
   @Input({ required: true }) content!: string | null;
   @Input() editing = false;
-  @Output() contentChange = new EventEmitter<string>();
+  @Input() fieldKey?: string;
+  @Output() contentChange = new EventEmitter<{ fieldKey: string; value: string }>();
 }

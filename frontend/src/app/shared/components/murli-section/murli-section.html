@@ -2,12 +2,17 @@
   <div class="md:w-30 shrink-0">
     <h3 class="text-base md:text-lg font-semibold">{{ title }}</h3>
   </div>
-  <div class="flex-1 min-w-0 text-sm md:text-base leading-relaxed self-center">
+  <div class="flex-1 min-w-0 text-sm md:text-base leading-relaxed self-center w-full">
     @if (editing) {
       @if (title == 'Avyakt Signal') {
         <textarea
           [value]="content"
-          (input)="contentChange.emit($any($event.target).value)"
+          (input)="
+            contentChange.emit({
+              fieldKey: fieldKey || title.toLowerCase(),
+              value: $any($event.target).value,
+            })
+          "
           placeholder="{{ title }} title..."
           class="w-full py-2 px-4 border rounded-md h-12"
           rows="4"
@@ -15,7 +20,12 @@
       }
       <textarea
         [value]="content"
-        (input)="contentChange.emit($any($event.target).value)"
+        (input)="
+          contentChange.emit({
+            fieldKey: fieldKey || title.toLowerCase(),
+            value: $any($event.target).value,
+          })
+        "
         placeholder="{{ title }}..."
         class="w-full py-2 px-4 border rounded-md min-h-12"
         rows="4"
