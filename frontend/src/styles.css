@@ -1,6 +1,8 @@
 @import "tailwindcss";
 @import "primeicons/primeicons.css";
 @import "tailwindcss-primeui";
+@import 'quill/dist/quill.snow.css';
+@plugin "@tailwindcss/typography";
 
 :root {
   --color-primary-50: #faf5ef;

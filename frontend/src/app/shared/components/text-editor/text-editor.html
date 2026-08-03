@@ -1,0 +1,8 @@
+<quill-editor
+  [(ngModel)]="value"
+  [modules]="modules"
+  [placeholder]="placeholder"
+  [readOnly]="readonly"
+  (ngModelChange)="onValueChange($event)"
+  class="w-full h-150"
+/>

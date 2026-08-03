@@ -13,7 +13,7 @@ import { ProgressSpinnerModule } from 'primeng/progressspinner';
 import { SelectButtonModule } from 'primeng/selectbutton';
 import { FormsModule } from '@angular/forms';
 import { SplitButtonModule } from 'primeng/splitbutton';
-
+import { TextEditor } from '../../shared/components/text-editor/text-editor';
 export interface TabItem {
   id: string;
   title: string;
@@ -34,6 +34,7 @@ export interface TabItem {
     SelectButtonModule,
     FormsModule,
     SplitButtonModule,
+    TextEditor,
   ],
   templateUrl: './today-murli.component.html',
   styleUrl: './today-murli.component.scss',
@@ -49,6 +50,8 @@ export class TodayMurliComponent {
   noMurli = signal(false);
   isEditing = signal(false);
   isEmpty = signal(false);
+  summaryEn = signal('');
+  summaryAr = signal('');
   murliTypeOptions = [
     { label: 'Morning', value: 'morning' },
     { label: 'Avyakt', value: 'avyakt' },
@@ -91,6 +94,8 @@ export class TodayMurliComponent {
     this.loading.set(true);
     this.noMurli.set(false);
     this.rawMurli.set(null);
+    this.summaryEn.set('');
+    this.summaryAr.set('');
 
     this.murlisService.getByDate(dateStr).subscribe({
       next: (data) => {
@@ -102,6 +107,8 @@ export class TodayMurliComponent {
         this.loading.set(false);
         if (this.appService.isAdmin()) {
           this.rawMurli.set(this.emptyMurli(dateStr));
+          this.summaryEn.set('');
+          this.summaryAr.set('');
           this.isEmpty.set(true);
         } else {
           this.noMurli.set(true);
